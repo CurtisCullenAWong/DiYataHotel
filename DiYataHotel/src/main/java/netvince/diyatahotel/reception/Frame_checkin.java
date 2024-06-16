@@ -90,6 +90,13 @@ public static String level;
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `room table` SET `room_status`='Occupied' WHERE `room_id`=?");
             preparedStatement.setInt(1,index);
             preparedStatement.executeUpdate();
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(false);
+            fname.setEditable(false);
+            lname.setEditable(false);
+            address.setEditable(false);
+            email.setEditable(false);
+            jComboBox.setEnabled(false);
         }
         catch (SQLException e) {
         e.printStackTrace();
@@ -351,6 +358,8 @@ public static String level;
         String add = address.getText();
         String room = jComboBox.getSelectedItem().toString().substring(0,3).trim();
         int roomindex = Integer.parseInt(room);
+        int confirmation = JOptionPane.showConfirmDialog(null, "Are the credentials entered final?", "Checking in.", JOptionPane.YES_NO_OPTION);
+        if (confirmation == JOptionPane.OK_OPTION) {
         if(name1.equals("First Name")
         ||name2.equals("Last Name")
         ||em.equals("Email")
@@ -362,35 +371,49 @@ public static String level;
             ||!name2.equals("Last Name")
             ||!em.equals("Email")
             ||!add.equals("Address")){
-            System.out.println(room);
-            System.out.println(roomindex);
-//            try {
-//                    Connection connection = netvince.diyatahotel.connect.getConnection();
-//                    PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `room_status`"
-//                    + "FROM `room table` WHERE `room_id` = ?");
-//                    preparedStatement1.setInt(1,Room);
-//                    ResultSet resultSet = preparedStatement1.executeQuery();
-//                    if(resultSet.next()){
-//                        JOptionPane.showMessageDialog(null, "This room is reserved for someone else","This room is already reserved",DO_NOTHING_ON_CLOSE);
-//                    }
-//                    else{
-//                    
-//                        }
-//                    }
-//            catch (SQLException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                    Connection connection = netvince.diyatahotel.connect.getConnection();
+                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
+                    + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
+                    preparedStatement.setString(1,name1);
+                    preparedStatement.setString(2,name2);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if(resultSet.next()){
+                    try {
+                    PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
+                    + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
+                    preparedStatement1.setString(1,name1);
+                    preparedStatement1.setString(2,name2);
+                    ResultSet resultSet1 = preparedStatement1.executeQuery();
+                        if(resultSet1.next()){
+                            JOptionPane.showMessageDialog(null, "This guest has checked in before!");
+                            checkin(roomindex);
+                        }
+                        else{
+                            guestTable(name1, name2, em, add);
+                            checkin(Integer.parseInt(room.trim()));
+                        }
+                    }
+                    catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "This room is already reserved for someone else.","This room is already reserved",DO_NOTHING_ON_CLOSE);
+                    }
+                }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         else if(!name1.equals("First Name")
                 ||!name2.equals("Last Name")
                 ||!em.equals("Email")
                 ||!add.equals("Address")){
-                    int confirmation = JOptionPane.showConfirmDialog(null, "Are the credentials entered final?", "Checking in.", JOptionPane.YES_NO_OPTION);
-                    if (confirmation == JOptionPane.OK_OPTION) {
                     try {
                     Connection connection = netvince.diyatahotel.connect.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
-                            + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
+                    + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
                     preparedStatement.setString(1,name1);
                     preparedStatement.setString(2,name2);
                     ResultSet resultSet1 = preparedStatement.executeQuery();

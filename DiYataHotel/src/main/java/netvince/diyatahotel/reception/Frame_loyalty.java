@@ -98,11 +98,11 @@ public class Frame_loyalty extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Membership ID", "Guest ID", "Loyalty Level", "Loyalty Points", "Loyalty Registration Date"
+                "Membership ID", "Guest ID", "Guest Last Name", "Loyalty Level", "Loyalty Points", "Loyalty Registration Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -124,6 +124,7 @@ public class Frame_loyalty extends javax.swing.JFrame {
             loyaltytbl.getColumnModel().getColumn(2).setResizable(false);
             loyaltytbl.getColumnModel().getColumn(3).setResizable(false);
             loyaltytbl.getColumnModel().getColumn(4).setResizable(false);
+            loyaltytbl.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jPanel2.add(jScrollPane1);
@@ -207,8 +208,9 @@ public class Frame_loyalty extends javax.swing.JFrame {
         loyaltytbl.getColumnModel().getColumn(2).setCellRenderer(align);
         loyaltytbl.getColumnModel().getColumn(3).setCellRenderer(align);
         loyaltytbl.getColumnModel().getColumn(4).setCellRenderer(align);
+        loyaltytbl.getColumnModel().getColumn(5).setCellRenderer(align);
         loyaltytbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        int[] columnWidths = {150, 150, 100, 200, 300}; // Adjust these widths as per your preference
+        int[] columnWidths = {150, 150, 150, 100, 200, 300}; // Adjust these widths as per your preference
         for (int i = 0; i < loyaltytbl.getColumnCount(); i++) {
             loyaltytbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
         }
@@ -233,7 +235,13 @@ public class Frame_loyalty extends javax.swing.JFrame {
                 String c = resultSet.getString("loyalty_level");
                 int d = resultSet.getInt("loyalty_points");
                 Date e = resultSet.getDate("loyalty_registration_date");
-                retrievemodel.addRow(new Object[]{a, b, c, d, e});
+                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM `guest table` WHERE guest_id = ?");
+                preparedStatement1.setInt(1, b);
+                ResultSet resultSet1 = preparedStatement1.executeQuery();
+                while(resultSet1.next()){
+                String f = resultSet1.getString("guest_lastname");
+                retrievemodel.addRow(new Object[]{a, b, f, c, d, e});
+                }
             }
         }
         catch (SQLException e) {

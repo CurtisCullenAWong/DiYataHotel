@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -197,7 +200,30 @@ public class Frame_room extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+public void housekeep(int roomid){
+    try {
+        Connection connection = connect.getConnection();
+        String updQuery = "UPDATE `room table` SET `room_status`='Housekeeping' WHERE room_id = ?";
+        PreparedStatement updStatement = connection.prepareStatement(updQuery);
+        updStatement.setInt(1, roomid);
+        updStatement.executeUpdate();
+        connection.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+public void available(int roomid){
+    try {
+        Connection connection = connect.getConnection();
+        String updQuery = "UPDATE `room table` SET `room_status`='Unoccupied' WHERE room_id = ?";
+        PreparedStatement updStatement = connection.prepareStatement(updQuery);
+        updStatement.setInt(1, roomid);
+        updStatement.executeUpdate();
+        connection.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         new Dash_reception().setVisible(true);
@@ -206,10 +232,48 @@ public class Frame_room extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = roomtbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            DefaultTableModel model = (DefaultTableModel) roomtbl.getModel();
+            int roomid = (int) model.getValueAt(selectedRow, 0);
+            if(roomtbl.getValueAt(roomtbl.getSelectedRow(), 2).equals("Checkout")){
+            int confirmation = JOptionPane.showConfirmDialog(null, "Do you want to send housekeeping?", "Checkout found.", JOptionPane.YES_NO_OPTION);
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    model.setRowCount(0);
+                    housekeep(roomid);
+                    table();
+                    }
+                else {
+                JOptionPane.showMessageDialog(null, "No rooms selected.");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Room is not clear for checkins.");
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = roomtbl.getSelectedRow();
+        if (selectedRow >= 0) {
+            DefaultTableModel model = (DefaultTableModel) roomtbl.getModel();
+            int roomid = (int) model.getValueAt(selectedRow, 0);
+            if(roomtbl.getValueAt(roomtbl.getSelectedRow(), 2).equals("Housekeeping")){
+            int confirmation = JOptionPane.showConfirmDialog(null, "Is housekeeping finished with this room?", "Room maintained?", JOptionPane.YES_NO_OPTION);
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    model.setRowCount(0);
+                    available(roomid);
+                    table();
+                }
+                else {
+                JOptionPane.showMessageDialog(null, "No rooms selected.");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Room is not clear for checkins.");
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

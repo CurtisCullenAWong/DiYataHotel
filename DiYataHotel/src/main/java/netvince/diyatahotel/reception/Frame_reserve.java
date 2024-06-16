@@ -242,8 +242,8 @@ public class Frame_reserve extends javax.swing.JFrame {
                     int rowCount = resultSet.getInt("rowCount");
                     PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO `reservation table`"
-        + "(`reservation_id`, `room_id`, `guest_firstname`, `guest_lastname`, `transaction_date`, `transaction_amount`)"
-        + "VALUES (?,?,?,?,?,?)");
+                    + "(`reservation_id`, `room_id`, `guest_firstname`, `guest_lastname`, `transaction_date`, `transaction_amount`)"
+                    + "VALUES (?,?,?,?,?,?)");
                     LocalDate currentDate = LocalDate.now();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     String formattedDate = currentDate.format(formatter);
@@ -276,7 +276,8 @@ public class Frame_reserve extends javax.swing.JFrame {
             DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
             while (resultSet.next()) {
                 String value1 = resultSet.getString("room_id");
-                model.addElement(value1 + "  - Unoccupied");
+                String value = resultSet.getString("room_status");
+                model.addElement(value1 + "  - "+value);
             }
             jComboBox.setModel(model);
         }
