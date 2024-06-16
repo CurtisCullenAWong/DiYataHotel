@@ -6,11 +6,9 @@ package netvince.diyatahotel;
 
 import netvince.diyatahotel.admin.Dash_admin;
 import netvince.diyatahotel.reception.Dash_reception;
-import netvince.diyatahotel.db.connect;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +23,7 @@ public class Frame_login extends javax.swing.JFrame {
 public static int attempts = 3;
 public static boolean loginAttempted = false;
 public static String login_name;
+public static String superuser = "admin", superpass = "admin";
     /**
      * Creates new form login_frame
      */
@@ -219,7 +218,7 @@ public static String login_name;
                 return;
             }
             String selectQuery = "SELECT * FROM `accounts table` WHERE username = ? AND password = ?";
-            try (PreparedStatement selectStatement = connect.getConnection().prepareStatement(selectQuery)) {
+            try (PreparedStatement selectStatement = netvince.diyatahotel.connect.getConnection().prepareStatement(selectQuery)) {
             selectStatement.setString(1, user);
             selectStatement.setString(2, pass);
                 try (ResultSet resultSet = selectStatement.executeQuery()) {
@@ -295,56 +294,36 @@ public static String login_name;
             }
         }
     }//GEN-LAST:event_showbtnActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String user = usertf.getText();
-        String pass = passpf.getText();
+public void login(){
+    String user = usertf.getText();
+    String pass = passpf.getText();
         if (user.equals("USERNAME")||pass.equals("PASSWORD")) {
                 JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
         }
-        else if(user.equals("admin")&&pass.equals("123")){
+        else if(user.equals(superuser)&&pass.equals(superuser)){
             superlogin();
         }
         else{
             verify(user,pass);
         }
         loginAttempted = false;
+}
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        login();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void passpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passpfKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            String user = usertf.getText();
-            String pass = passpf.getText();
-            if (user.equals("USERNAME")||pass.equals("PASSWORD")) {
-                    JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
-            }
-            else if(user.equals("admin")&&pass.equals("123")){
-                superlogin();
-            }
-            else{
-                verify(user,pass);
-            }
-            loginAttempted = false;
+            login();
         }
     }//GEN-LAST:event_passpfKeyPressed
 
     private void usertfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usertfKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            String user = usertf.getText();
-            String pass = passpf.getText();
-            if (user.equals("USERNAME")||pass.equals("PASSWORD")) {
-                    JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
-            }
-            else if(user.equals("admin")&&pass.equals("123")){
-                superlogin();
-            }
-            else{
-                verify(user,pass);
-            }
-            loginAttempted = false;
+            login();
         }
     }//GEN-LAST:event_usertfKeyPressed
 
@@ -373,9 +352,6 @@ public static String login_name;
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Frame_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

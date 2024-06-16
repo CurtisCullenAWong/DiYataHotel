@@ -1,4 +1,6 @@
-package netvince.diyatahotel.db;
+package netvince.diyatahotel;
+
+
 
 import java.sql.*;
 

@@ -46,7 +46,7 @@ public class Frame_overview extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Employee List");
+        jLabel1.setText("Transactions Overview");
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
@@ -86,11 +86,8 @@ public class Frame_overview extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null,"Are you sure you want to logout?", "Logging out", JOptionPane.YES_NO_OPTION);
-        if(a==JOptionPane.YES_OPTION){
-            new Dash_admin().setVisible(true);
-            dispose();
-        }
+        new Dash_admin().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
