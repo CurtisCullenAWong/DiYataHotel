@@ -35,8 +35,11 @@ public class Dash_reception extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        checkin = new javax.swing.JButton();
+        checkout = new javax.swing.JButton();
+        room1 = new javax.swing.JButton();
+        room = new javax.swing.JButton();
+        loyalty = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Receptionist Dashboard");
@@ -71,29 +74,65 @@ public class Dash_reception extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(null);
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 204));
-        jButton2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Reserve For A Guest");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        checkin.setBackground(new java.awt.Color(0, 204, 204));
+        checkin.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        checkin.setForeground(new java.awt.Color(0, 0, 0));
+        checkin.setText("Guest Check In");
+        checkin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                checkinActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2);
-        jButton2.setBounds(60, 80, 480, 100);
+        jPanel2.add(checkin);
+        checkin.setBounds(60, 30, 230, 100);
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 204));
-        jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Guest Loyalty Application");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        checkout.setBackground(new java.awt.Color(0, 204, 204));
+        checkout.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        checkout.setForeground(new java.awt.Color(0, 0, 0));
+        checkout.setText("Guest Check Out");
+        checkout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                checkoutActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3);
-        jButton3.setBounds(60, 270, 480, 100);
+        jPanel2.add(checkout);
+        checkout.setBounds(310, 30, 230, 100);
+
+        room1.setBackground(new java.awt.Color(0, 204, 204));
+        room1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        room1.setForeground(new java.awt.Color(0, 0, 0));
+        room1.setText("Reservation");
+        room1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                room1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(room1);
+        room1.setBounds(60, 170, 230, 100);
+
+        room.setBackground(new java.awt.Color(0, 204, 204));
+        room.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        room.setForeground(new java.awt.Color(0, 0, 0));
+        room.setText("Housekeeping");
+        room.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roomActionPerformed(evt);
+            }
+        });
+        jPanel2.add(room);
+        room.setBounds(310, 170, 230, 100);
+
+        loyalty.setBackground(new java.awt.Color(0, 204, 204));
+        loyalty.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        loyalty.setForeground(new java.awt.Color(0, 0, 0));
+        loyalty.setText("Guest Loyalty");
+        loyalty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loyaltyActionPerformed(evt);
+            }
+        });
+        jPanel2.add(loyalty);
+        loyalty.setBounds(60, 320, 480, 100);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(100, 160, 600, 470);
@@ -125,62 +164,52 @@ public class Dash_reception extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void loyaltyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loyaltyActionPerformed
         // TODO add your handling code here:
         new Frame_loyalty().setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_loyaltyActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void checkinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkinActionPerformed
         // TODO add your handling code here:
-        new Frame_reservation().setVisible(true);
+        new Frame_checkin().setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_checkinActionPerformed
+
+    private void checkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutActionPerformed
+        // TODO add your handling code here:
+        new Frame_checkout().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_checkoutActionPerformed
+
+    private void roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomActionPerformed
+        // TODO add your handling code here:
+        new Frame_room().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_roomActionPerformed
+
+    private void room1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_room1ActionPerformed
+        // TODO add your handling code here:
+        new Frame_reserve().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_room1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dash_reception.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dash_reception.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dash_reception.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dash_reception.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dash_reception().setVisible(true);
-            }
-        });
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton checkin;
+    private javax.swing.JButton checkout;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton loyalty;
+    private javax.swing.JButton room;
+    private javax.swing.JButton room1;
     // End of variables declaration//GEN-END:variables
 }

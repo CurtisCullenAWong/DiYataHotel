@@ -161,6 +161,11 @@ public class Frame_employeeApply extends javax.swing.JFrame {
                 phoneFocusLost(evt);
             }
         });
+        phone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                phoneKeyPressed(evt);
+            }
+        });
         jPanel3.add(phone);
         phone.setBounds(60, 190, 230, 50);
 
@@ -237,8 +242,8 @@ public class Frame_employeeApply extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String name1 = fname.getText();
-        String name2 = fname.getText();
-        String email = fname.getText();
+        String name2 = lname.getText();
+        String em = email.getText();
         String add = address.getText();
         String phonenum = phone.getText();
         String pos = position.getText();
@@ -254,7 +259,7 @@ public class Frame_employeeApply extends javax.swing.JFrame {
         }
         else if(!name1.equals("First Name")
             ||!name2.equals("Last Name")
-            ||!email.equals("Email")
+            ||!em.equals("Email")
             ||!add.equals("Address")
             ||!phonenum.equals("Phone")
             ||!pos.equals("Position")
@@ -281,7 +286,7 @@ public class Frame_employeeApply extends javax.swing.JFrame {
                             preparedStatement.setInt(1,rowCount + 1);
                             preparedStatement.setString(2,name1);
                             preparedStatement.setString(3,name2);
-                            preparedStatement.setString(4,email);
+                            preparedStatement.setString(4,em);
                             preparedStatement.setString(5,add);
                             preparedStatement.setString(6,phonenum);
                             preparedStatement.setString(7,pos);
@@ -364,13 +369,13 @@ public class Frame_employeeApply extends javax.swing.JFrame {
     private void phoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneFocusGained
         // TODO add your handling code here:
         if(phone.getText().equals("Phone Number")){
-        phone.setText("+63 ");
+        phone.setText("+63 9");
         }
     }//GEN-LAST:event_phoneFocusGained
 
     private void phoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneFocusLost
         // TODO add your handling code here:
-        if(phone.getText().equals("+63 ")){
+        if(phone.getText().equals("+63 9")){
             phone.setText("Phone Number");
         }
         else if(phone.getText().isEmpty()){
@@ -405,6 +410,29 @@ public class Frame_employeeApply extends javax.swing.JFrame {
             address.setText("Address");
         }
     }//GEN-LAST:event_addressFocusLost
+
+    private void phoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneKeyPressed
+        // TODO add your handling code here:
+        String pn = phone.getText();
+        int l = pn.length();
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c)){
+            if(l<14){
+                phone.setEditable(true);
+            }
+            else{
+                phone.setEditable(false);
+            }
+        }
+        else{
+            if(Character.isISOControl(c)){
+                phone.setEditable(true);
+            }
+            else{
+                phone.setEditable(false);
+            }
+        }
+    }//GEN-LAST:event_phoneKeyPressed
 
     /**
      * @param args the command line arguments

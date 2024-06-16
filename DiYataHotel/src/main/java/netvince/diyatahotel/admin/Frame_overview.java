@@ -4,8 +4,21 @@
  */
 package netvince.diyatahotel.admin;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 import netvince.diyatahotel.Frame_login;
+import netvince.diyatahotel.connect;
 
 /**
  *
@@ -19,6 +32,7 @@ public class Frame_overview extends javax.swing.JFrame {
     public Frame_overview() {
         initComponents();
         setLocationRelativeTo(null);
+        table();
     }
 
     /**
@@ -34,6 +48,8 @@ public class Frame_overview extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        transactiontbl = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Dashboard");
@@ -67,8 +83,53 @@ public class Frame_overview extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(153, 255, 255));
         jPanel3.setLayout(null);
+
+        jScrollPane1.setRowHeaderView(null);
+
+        transactiontbl.setBackground(new java.awt.Color(0, 204, 204));
+        transactiontbl.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        transactiontbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Transaction ID", "Employee ID", "Guest ID", "Payment Method", "Room ID", "Checkin Date", "Checkout Date", "Checkin Duration"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        transactiontbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        transactiontbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        transactiontbl.setRowHeight(50);
+        transactiontbl.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        transactiontbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        transactiontbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        transactiontbl.getTableHeader().setResizingAllowed(false);
+        transactiontbl.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(transactiontbl);
+        transactiontbl.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (transactiontbl.getColumnModel().getColumnCount() > 0) {
+            transactiontbl.getColumnModel().getColumn(0).setResizable(false);
+            transactiontbl.getColumnModel().getColumn(1).setResizable(false);
+            transactiontbl.getColumnModel().getColumn(2).setResizable(false);
+            transactiontbl.getColumnModel().getColumn(3).setResizable(false);
+            transactiontbl.getColumnModel().getColumn(4).setResizable(false);
+            transactiontbl.getColumnModel().getColumn(5).setResizable(false);
+            transactiontbl.getColumnModel().getColumn(6).setResizable(false);
+            transactiontbl.getColumnModel().getColumn(7).setResizable(false);
+        }
+
+        jPanel3.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 760, 450);
+
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(90, 170, 600, 470);
+        jPanel3.setBounds(10, 170, 780, 470);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,7 +150,56 @@ public class Frame_overview extends javax.swing.JFrame {
         new Dash_admin().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+    public void table(){
+        TableCellRenderer rendererFromHeader = transactiontbl.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer align = new DefaultTableCellRenderer();
+        align.setHorizontalAlignment(JLabel.CENTER);
+        transactiontbl.getColumnModel().getColumn(0).setCellRenderer(align);
+        transactiontbl.getColumnModel().getColumn(1).setCellRenderer(align);
+        transactiontbl.getColumnModel().getColumn(2).setCellRenderer(align);
+        transactiontbl.getColumnModel().getColumn(3).setCellRenderer(align);
+        transactiontbl.getColumnModel().getColumn(4).setCellRenderer(align);
+        transactiontbl.getColumnModel().getColumn(5).setCellRenderer(align);
+        transactiontbl.getColumnModel().getColumn(6).setCellRenderer(align);
+        transactiontbl.getColumnModel().getColumn(7).setCellRenderer(align);
+        transactiontbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        int[] columnWidths = {100, 100, 100, 300, 100, 200, 200, 200}; // Adjust these widths as per your preference
+        for (int i = 0; i < transactiontbl.getColumnCount(); i++) {
+            transactiontbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+        }
+        retrieveData();
+    }
+    void retrieveData() {
+        DefaultTableModel retrievemodel = (DefaultTableModel) transactiontbl.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(retrievemodel);
+        transactiontbl.setRowSorter(sorter);
+        retrievemodel.setRowCount(0);
+        String url = connect.url;
+        String user = connect.user;
+        String password = connect.password;
 
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT * FROM `transaction overview table`";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int a = resultSet.getInt("transactionoverview_id");
+                int b = resultSet.getInt("employee_id");
+                int c = resultSet.getInt("guest_id");
+                String d = resultSet.getString("transactiontype_paymentmode");
+                int e = resultSet.getInt("room_id");
+                Date f = resultSet.getDate("checkin_date");
+                Date g = resultSet.getDate("checkout_date");
+                Time h = resultSet.getTime("checkin_duration");    
+                retrievemodel.addRow(new Object[]{a, b, c, d, e, f, g, h});
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -385,5 +495,7 @@ public class Frame_overview extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable transactiontbl;
     // End of variables declaration//GEN-END:variables
 }

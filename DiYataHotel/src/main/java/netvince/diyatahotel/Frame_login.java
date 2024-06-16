@@ -49,9 +49,10 @@ public static String superuser = "admin", superpass = "admin";
         jLabel3 = new javax.swing.JLabel();
         usertf = new javax.swing.JTextField();
         passpf = new javax.swing.JPasswordField();
+        pb1 = new javax.swing.JProgressBar();
+        CLOSE = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         showbtn = new javax.swing.JToggleButton();
-        pb1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DiYata Hotel");
@@ -136,6 +137,23 @@ public static String superuser = "admin", superpass = "admin";
         jPanel1.add(passpf);
         passpf.setBounds(260, 440, 280, 50);
 
+        pb1.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(pb1);
+        pb1.setBounds(150, 680, 500, 50);
+
+        CLOSE.setBackground(new java.awt.Color(153, 255, 255));
+        CLOSE.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        CLOSE.setForeground(new java.awt.Color(0, 0, 0));
+        CLOSE.setText("CLOSE APP");
+        CLOSE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        CLOSE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CLOSEActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CLOSE);
+        CLOSE.setBounds(310, 680, 180, 50);
+
         jButton1.setBackground(new java.awt.Color(153, 255, 255));
         jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -159,10 +177,6 @@ public static String superuser = "admin", superpass = "admin";
         jPanel1.add(showbtn);
         showbtn.setBounds(550, 440, 50, 50);
 
-        pb1.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel1.add(pb1);
-        pb1.setBounds(150, 680, 500, 50);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,6 +192,9 @@ public static String superuser = "admin", superpass = "admin";
     }// </editor-fold>//GEN-END:initComponents
     public void superlogin(){
         pb1.setVisible(true);
+        jButton1.setEnabled(false);
+        usertf.setEditable(false);
+        passpf.setEditable(false);
         Timer tmr = new Timer(5, new ActionListener() {
                     int progress = 0;
                     public void actionPerformed(ActionEvent e) {
@@ -195,6 +212,9 @@ public static String superuser = "admin", superpass = "admin";
     }
     public void endlogin(){
         pb1.setVisible(true);
+        jButton1.setEnabled(false);
+        usertf.setEditable(false);
+        passpf.setEditable(false);
         Timer tmr = new Timer(5, new ActionListener() {
                     int progress = 0;
                     public void actionPerformed(ActionEvent e) {
@@ -327,6 +347,11 @@ public void login(){
         }
     }//GEN-LAST:event_usertfKeyPressed
 
+    private void CLOSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLOSEActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_CLOSEActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,6 +388,7 @@ public void login(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CLOSE;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

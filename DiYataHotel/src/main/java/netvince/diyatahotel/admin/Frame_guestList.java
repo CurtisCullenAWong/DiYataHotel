@@ -51,7 +51,7 @@ public class Frame_guestList extends javax.swing.JFrame {
         guesttbl.getColumnModel().getColumn(4).setCellRenderer(align);
         guesttbl.getColumnModel().getColumn(5).setCellRenderer(align);
         guesttbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        int[] columnWidths = {100, 150, 150, 300, 250, 200}; // Adjust these widths as per your preference
+        int[] columnWidths = {100, 150, 150, 300, 500, 200}; // Adjust these widths as per your preference
         for (int i = 0; i < guesttbl.getColumnCount(); i++) {
             guesttbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
         }
@@ -76,7 +76,10 @@ public class Frame_guestList extends javax.swing.JFrame {
                 String c = resultSet.getString("guest_lastname");
                 String d = resultSet.getString("guest_email");
                 String e = resultSet.getString("guest_address");
-                String f = resultSet.getString("membership_id");
+                String f = resultSet.getString("loyalty_level");
+                if (f == null) {
+                    f = "N/A";
+                }
                 retrievemodel.addRow(new Object[]{a, b, c, d, e, f});
             }
         }
@@ -137,7 +140,7 @@ public class Frame_guestList extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Guest ID", "Guest First Name", "Guest Last Name", "Guest Email", "Guest Address", "Guest Membership"
+                "Guest ID", "Guest First Name", "Guest Last Name", "Guest Email", "Guest Address", "Loyalty Level"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -158,6 +161,14 @@ public class Frame_guestList extends javax.swing.JFrame {
         guesttbl.getTableHeader().setResizingAllowed(false);
         guesttbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(guesttbl);
+        if (guesttbl.getColumnModel().getColumnCount() > 0) {
+            guesttbl.getColumnModel().getColumn(0).setResizable(false);
+            guesttbl.getColumnModel().getColumn(1).setResizable(false);
+            guesttbl.getColumnModel().getColumn(2).setResizable(false);
+            guesttbl.getColumnModel().getColumn(3).setResizable(false);
+            guesttbl.getColumnModel().getColumn(4).setResizable(false);
+            guesttbl.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         jPanel3.add(jScrollPane1);
         jScrollPane1.setBounds(20, 20, 560, 430);

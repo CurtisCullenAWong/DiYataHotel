@@ -4,7 +4,22 @@
  */
 package netvince.diyatahotel.reception;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
+import netvince.diyatahotel.connect;
 import netvince.diyatahotel.reception.Dash_reception;
 
 /**
@@ -19,6 +34,8 @@ public class Frame_loyalty extends javax.swing.JFrame {
     public Frame_loyalty() {
         initComponents();
         setLocationRelativeTo(null);
+        table();
+        loadData();
     }
 
     /**
@@ -34,6 +51,11 @@ public class Frame_loyalty extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        loyaltytbl = new javax.swing.JTable();
+        jComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,7 +66,7 @@ public class Frame_loyalty extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Guest Loyalty Form");
+        jLabel1.setText("Guest Loyalty Overview");
         jLabel1.setToolTipText("");
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
@@ -66,6 +88,77 @@ public class Frame_loyalty extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(null);
+
+        jScrollPane1.setRowHeaderView(null);
+
+        loyaltytbl.setBackground(new java.awt.Color(0, 204, 204));
+        loyaltytbl.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        loyaltytbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Membership ID", "Guest ID", "Loyalty Level", "Loyalty Points", "Loyalty Registration Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        loyaltytbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        loyaltytbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        loyaltytbl.setRowHeight(50);
+        loyaltytbl.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        loyaltytbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        loyaltytbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        loyaltytbl.getTableHeader().setResizingAllowed(false);
+        loyaltytbl.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(loyaltytbl);
+        if (loyaltytbl.getColumnModel().getColumnCount() > 0) {
+            loyaltytbl.getColumnModel().getColumn(0).setResizable(false);
+            loyaltytbl.getColumnModel().getColumn(1).setResizable(false);
+            loyaltytbl.getColumnModel().getColumn(2).setResizable(false);
+            loyaltytbl.getColumnModel().getColumn(3).setResizable(false);
+            loyaltytbl.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 430, 450);
+
+        jComboBox.setBackground(new java.awt.Color(0, 204, 204));
+        jComboBox.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(jComboBox);
+        jComboBox.setBounds(450, 70, 140, 50);
+
+        jLabel2.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Guest ID #");
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel2.setOpaque(true);
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(470, 10, 100, 50);
+
+        jButton2.setBackground(new java.awt.Color(153, 255, 255));
+        jButton2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Apply Loyalty");
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(450, 390, 140, 70);
+
         jPanel1.add(jPanel2);
         jPanel2.setBounds(100, 160, 600, 470);
 
@@ -86,15 +179,116 @@ public class Frame_loyalty extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void loadData(){
+        try (Connection connection = DriverManager.getConnection(connect.url, connect.user, connect.password)) {
+            String query = "SELECT `guest_id`, `guest_lastname` FROM `guest table` WHERE `membership_id` IS NULL";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            while (resultSet.next()) {
+                String value = resultSet.getString("guest_id");
+                String value1 = resultSet.getString("guest_lastname");
+                model.addElement(value+"  - "+value1);
+            }
+            jComboBox.setModel(model);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void table(){
+        TableCellRenderer rendererFromHeader = loyaltytbl.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer align = new DefaultTableCellRenderer();
+        align.setHorizontalAlignment(JLabel.CENTER);
+        loyaltytbl.getColumnModel().getColumn(0).setCellRenderer(align);
+        loyaltytbl.getColumnModel().getColumn(1).setCellRenderer(align);
+        loyaltytbl.getColumnModel().getColumn(2).setCellRenderer(align);
+        loyaltytbl.getColumnModel().getColumn(3).setCellRenderer(align);
+        loyaltytbl.getColumnModel().getColumn(4).setCellRenderer(align);
+        loyaltytbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        int[] columnWidths = {150, 150, 100, 200, 300}; // Adjust these widths as per your preference
+        for (int i = 0; i < loyaltytbl.getColumnCount(); i++) {
+            loyaltytbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+        }
+        retrieveData();
+    }
+    void retrieveData() {
+        DefaultTableModel retrievemodel = (DefaultTableModel) loyaltytbl.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(retrievemodel);
+        loyaltytbl.setRowSorter(sorter);
+        retrievemodel.setRowCount(0);
+        String url = connect.url;
+        String user = connect.user;
+        String password = connect.password;
 
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT * FROM `loyalty program table`";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int a = resultSet.getInt("membership_id");
+                int b = resultSet.getInt("guest_id");
+                String c = resultSet.getString("loyalty_level");
+                int d = resultSet.getInt("loyalty_points");
+                Date e = resultSet.getDate("loyalty_registration_date");
+                retrievemodel.addRow(new Object[]{a, b, c, d, e});
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null,"Are you sure you want to return? Fill-up data will be lost.", "Returning to dashboard.", JOptionPane.YES_NO_OPTION);
-        if(a==JOptionPane.YES_OPTION){
-            new Dash_reception().setVisible(true);
-            dispose();
-        }
+        new Dash_reception().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int confirmation = JOptionPane.showConfirmDialog(null, "Apply for loyalty program?", "Applying for loyalty.", JOptionPane.YES_NO_OPTION);
+            if (confirmation == JOptionPane.OK_OPTION) {
+        int index = (int) Integer.parseInt(jComboBox.getSelectedItem().toString().substring(0,3).trim());
+                System.out.println(index);
+        try {
+                Connection connection = netvince.diyatahotel.connect.getConnection();
+                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_id` FROM `guest table` WHERE guest_id = ?");
+                preparedStatement1.setInt(1,index);
+                ResultSet resultSet = preparedStatement1.executeQuery();
+                PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `loyalty program table`");
+                ResultSet Count = count.executeQuery();
+                while(Count.next()){
+                    int rowCount = Count.getInt("rowCount");
+                    if(resultSet.next()){
+                        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `loyalty program table`"
+                                + "(`membership_id`, `loyalty_level`, `loyalty_points`, `loyalty_registration_date`, `guest_id`)"
+                                + "VALUES (?,?,?,?,?)");
+                        PreparedStatement update = connection.prepareStatement("UPDATE `guest table` SET `membership_id`=?,`loyalty_level`=? WHERE `guest_id`=?");
+                        update.setInt(1,1);
+                        update.setString(2,"Bronze");
+                        update.setInt(3,index);
+                        update.executeUpdate();
+                        LocalDate currentDate = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String formattedDate = currentDate.format(formatter);
+                        preparedStatement.setInt(1,rowCount + 1);
+                        preparedStatement.setString(2,"Bronze");
+                        preparedStatement.setInt(3,1);
+                        preparedStatement.setDate(4,Date.valueOf(formattedDate));
+                        preparedStatement.setInt(5,index);
+                        preparedStatement.executeUpdate();
+                        new Frame_loyalty().setVisible(true);
+                        dispose();
+                    }
+                }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,8 +330,13 @@ public class Frame_loyalty extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable loyaltytbl;
     // End of variables declaration//GEN-END:variables
 }
