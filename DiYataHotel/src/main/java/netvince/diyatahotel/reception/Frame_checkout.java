@@ -35,7 +35,6 @@ public class Frame_checkout extends javax.swing.JFrame {
     public Frame_checkout() {
         initComponents();
         setLocationRelativeTo(null);
-        table();
         loadData();
     }
 
@@ -52,8 +51,6 @@ public class Frame_checkout extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        reservetbl = new javax.swing.JTable();
         roomID = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -92,62 +89,22 @@ public class Frame_checkout extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(null);
 
-        jScrollPane1.setRowHeaderView(null);
-
-        reservetbl.setBackground(new java.awt.Color(0, 204, 204));
-        reservetbl.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
-        reservetbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Room ID", "Guest ID", "Guest First Name", "Guest Last Name", "Checkin Date"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        reservetbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        reservetbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        reservetbl.setRowHeight(50);
-        reservetbl.setSelectionBackground(new java.awt.Color(0, 102, 102));
-        reservetbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        reservetbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        reservetbl.getTableHeader().setResizingAllowed(false);
-        reservetbl.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(reservetbl);
-        if (reservetbl.getColumnModel().getColumnCount() > 0) {
-            reservetbl.getColumnModel().getColumn(0).setResizable(false);
-            reservetbl.getColumnModel().getColumn(1).setResizable(false);
-            reservetbl.getColumnModel().getColumn(2).setResizable(false);
-            reservetbl.getColumnModel().getColumn(3).setResizable(false);
-            reservetbl.getColumnModel().getColumn(4).setResizable(false);
-        }
-
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(50, 20, 500, 280);
-
         roomID.setBackground(new java.awt.Color(0, 204, 204));
-        roomID.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        roomID.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
         roomID.setForeground(new java.awt.Color(0, 0, 0));
         roomID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(roomID);
-        roomID.setBounds(120, 310, 160, 50);
+        roomID.setBounds(240, 40, 310, 90);
 
         jLabel2.setBackground(new java.awt.Color(0, 204, 204));
-        jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Room #");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(50, 310, 70, 50);
+        jLabel2.setBounds(50, 40, 170, 90);
 
         jButton3.setBackground(new java.awt.Color(153, 255, 255));
         jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
@@ -160,17 +117,17 @@ public class Frame_checkout extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(50, 370, 500, 70);
+        jButton3.setBounds(50, 340, 500, 90);
 
         paymentMode.setBackground(new java.awt.Color(0, 204, 204));
-        paymentMode.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        paymentMode.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
         paymentMode.setForeground(new java.awt.Color(0, 0, 0));
         paymentMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
         jPanel2.add(paymentMode);
-        paymentMode.setBounds(430, 310, 120, 50);
+        paymentMode.setBounds(270, 190, 280, 90);
 
         amount.setBackground(new java.awt.Color(0, 204, 204));
-        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
         amount.setForeground(new java.awt.Color(0, 0, 0));
         amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         amount.setText("Amount");
@@ -188,7 +145,7 @@ public class Frame_checkout extends javax.swing.JFrame {
             }
         });
         jPanel2.add(amount);
-        amount.setBounds(320, 310, 110, 50);
+        amount.setBounds(50, 190, 200, 90);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(100, 160, 600, 470);
@@ -264,53 +221,6 @@ public class Frame_checkout extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    public void table(){
-        TableCellRenderer rendererFromHeader = reservetbl.getTableHeader().getDefaultRenderer();
-        JLabel headerLabel = (JLabel) rendererFromHeader;
-        headerLabel.setHorizontalAlignment(JLabel.CENTER);
-        DefaultTableCellRenderer align = new DefaultTableCellRenderer();
-        align.setHorizontalAlignment(JLabel.CENTER);
-        reservetbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        int[] columnWidths = {100, 100, 150, 150, 200}; // Adjust these widths as per your preference
-        for (int i = 0; i < reservetbl.getColumnCount(); i++) {
-            reservetbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
-            reservetbl.getColumnModel().getColumn(i).setCellRenderer(align);
-        }
-        retrieveData();
-    }
-    void retrieveData() {
-        DefaultTableModel retrievemodel = (DefaultTableModel) reservetbl.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(retrievemodel);
-        reservetbl.setRowSorter(sorter);
-        retrievemodel.setRowCount(0);
-        String url = connect.url;
-        String user = connect.user;
-        String password = connect.password;
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `room table` WHERE `room_status` = 'Occupied'");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM `transaction overview table`");
-                ResultSet resultSet1 = preparedStatement1.executeQuery();
-                while(resultSet1.next()){
-                    PreparedStatement preparedStatement2 = connection.prepareStatement("SELECT * FROM `guest table` WHERE `guest_id` = ?");
-                    preparedStatement2.setInt(1, resultSet1.getInt("guest_id"));
-                    ResultSet resultSet2 = preparedStatement2.executeQuery();
-                    while(resultSet2.next()){
-                    int room = resultSet.getInt("room_id");
-                    int guest = resultSet1.getInt("guest_id");
-                    String c = resultSet2.getString("guest_firstname");
-                    String d = resultSet2.getString("guest_lastname");
-                    Date date = resultSet1.getDate("checkin_date");
-                    retrievemodel.addRow(new Object[]{room,guest,c,d,date});
-                    }
-                }
-            }
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int a = JOptionPane.showConfirmDialog(null,"Are you sure you want to return? Fill-up data will be lost.", "Returning to dashboard.", JOptionPane.YES_NO_OPTION);
@@ -331,6 +241,8 @@ public class Frame_checkout extends javax.swing.JFrame {
         else{
             selected(mode,room,Integer.parseInt(amt));
             receipt_function.transaction_type(mode, "Checkout", "Paid");
+            new Frame_checkout().setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -541,9 +453,7 @@ public class Frame_checkout extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> paymentMode;
-    private javax.swing.JTable reservetbl;
     private javax.swing.JComboBox<String> roomID;
     // End of variables declaration//GEN-END:variables
 }
