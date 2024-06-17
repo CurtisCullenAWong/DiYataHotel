@@ -258,43 +258,43 @@ public class Frame_loyalty extends javax.swing.JFrame {
         // TODO add your handling code here:
         int confirmation = JOptionPane.showConfirmDialog(null, "Apply for loyalty program?", "Applying for loyalty.", JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.OK_OPTION) {
-        int index = (int) Integer.parseInt(jComboBox.getSelectedItem().toString().substring(0,3).trim());
-                System.out.println(index);
-        try {
-                Connection connection = netvince.diyatahotel.connect.getConnection();
-                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_id` FROM `guest table` WHERE guest_id = ?");
-                preparedStatement1.setInt(1,index);
-                ResultSet resultSet = preparedStatement1.executeQuery();
-                PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `loyalty program table`");
-                ResultSet Count = count.executeQuery();
-                while(Count.next()){
-                    int rowCount = Count.getInt("rowCount");
-                    if(resultSet.next()){
-                        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `loyalty program table`"
-                                + "(`membership_id`, `loyalty_level`, `loyalty_points`, `loyalty_registration_date`, `guest_id`)"
-                                + "VALUES (?,?,?,?,?)");
-                        PreparedStatement update = connection.prepareStatement("UPDATE `guest table` SET `membership_id`=?,`loyalty_level`=? WHERE `guest_id`=?");
-                        update.setInt(1,1);
-                        update.setString(2,"Bronze");
-                        update.setInt(3,index);
-                        update.executeUpdate();
-                        LocalDate currentDate = LocalDate.now();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        String formattedDate = currentDate.format(formatter);
-                        preparedStatement.setInt(1,rowCount + 1);
-                        preparedStatement.setString(2,"Bronze");
-                        preparedStatement.setInt(3,1);
-                        preparedStatement.setDate(4,Date.valueOf(formattedDate));
-                        preparedStatement.setInt(5,index);
-                        preparedStatement.executeUpdate();
-                        new Frame_loyalty().setVisible(true);
-                        dispose();
+            int index = (int) Integer.parseInt(jComboBox.getSelectedItem().toString().substring(0,3).trim());
+            System.out.println(index);
+            try {
+                    Connection connection = netvince.diyatahotel.connect.getConnection();
+                    PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_id` FROM `guest table` WHERE guest_id = ?");
+                    preparedStatement1.setInt(1,index);
+                    ResultSet resultSet = preparedStatement1.executeQuery();
+                    PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `loyalty program table`");
+                    ResultSet Count = count.executeQuery();
+                    while(Count.next()){
+                        int rowCount = Count.getInt("rowCount");
+                        if(resultSet.next()){
+                            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `loyalty program table`"
+                            + "(`membership_id`, `loyalty_level`, `loyalty_points`, `loyalty_registration_date`, `guest_id`)"
+                            + "VALUES (?,?,?,?,?)");
+                            LocalDate currentDate = LocalDate.now();
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            String formattedDate = currentDate.format(formatter);
+                            preparedStatement.setInt(1,rowCount+1);
+                            preparedStatement.setString(2,"Bronze");
+                            preparedStatement.setInt(3,1);
+                            preparedStatement.setDate(4,Date.valueOf(formattedDate));
+                            preparedStatement.setInt(5,index);
+                            preparedStatement.executeUpdate();
+                            PreparedStatement update = connection.prepareStatement("UPDATE `guest table` SET `membership_id`=?,`loyalty_level`=? WHERE `guest_id`=?");
+                            update.setInt(1,rowCount+1);
+                            update.setString(2,"Bronze");
+                            update.setInt(3,index);
+                            update.executeUpdate();
+                            new Frame_loyalty().setVisible(true);
+                            dispose();
+                        }
                     }
-                }
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

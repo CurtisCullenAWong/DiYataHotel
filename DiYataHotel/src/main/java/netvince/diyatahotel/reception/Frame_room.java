@@ -259,7 +259,7 @@ public void available(int roomid){
         if (selectedRow >= 0) {
             DefaultTableModel model = (DefaultTableModel) roomtbl.getModel();
             int roomid = (int) model.getValueAt(selectedRow, 0);
-            if(roomtbl.getValueAt(roomtbl.getSelectedRow(), 2).equals("Housekeeping")){
+            if(roomtbl.getValueAt(roomtbl.getSelectedRow(), 2).equals("Housekeeping")||roomtbl.getValueAt(roomtbl.getSelectedRow(), 2).equals("Reserved")){
             int confirmation = JOptionPane.showConfirmDialog(null, "Is housekeeping finished with this room?", "Room maintained?", JOptionPane.YES_NO_OPTION);
                 if (confirmation == JOptionPane.YES_OPTION) {
                     model.setRowCount(0);

@@ -12,12 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
-import netvince.diyatahotel.Frame_login;
 import netvince.diyatahotel.connect;
 
 /**
@@ -93,7 +91,7 @@ public class Frame_overview extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Transaction ID", "Employee ID", "Guest ID", "Payment Method", "Room ID", "Checkin Date", "Checkout Date", "Checkin Duration"
+                "Transaction ID", "Reception Name", "Guest ID", "Payment Method", "Room ID", "Checkin Date", "Checkout Date", "Transaction Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -105,6 +103,7 @@ public class Frame_overview extends javax.swing.JFrame {
             }
         });
         transactiontbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        transactiontbl.setColumnSelectionAllowed(true);
         transactiontbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         transactiontbl.setRowHeight(50);
         transactiontbl.setSelectionBackground(new java.awt.Color(0, 102, 102));
@@ -156,18 +155,11 @@ public class Frame_overview extends javax.swing.JFrame {
         headerLabel.setHorizontalAlignment(JLabel.CENTER);
         DefaultTableCellRenderer align = new DefaultTableCellRenderer();
         align.setHorizontalAlignment(JLabel.CENTER);
-        transactiontbl.getColumnModel().getColumn(0).setCellRenderer(align);
-        transactiontbl.getColumnModel().getColumn(1).setCellRenderer(align);
-        transactiontbl.getColumnModel().getColumn(2).setCellRenderer(align);
-        transactiontbl.getColumnModel().getColumn(3).setCellRenderer(align);
-        transactiontbl.getColumnModel().getColumn(4).setCellRenderer(align);
-        transactiontbl.getColumnModel().getColumn(5).setCellRenderer(align);
-        transactiontbl.getColumnModel().getColumn(6).setCellRenderer(align);
-        transactiontbl.getColumnModel().getColumn(7).setCellRenderer(align);
         transactiontbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         int[] columnWidths = {100, 100, 100, 300, 100, 200, 200, 200}; // Adjust these widths as per your preference
         for (int i = 0; i < transactiontbl.getColumnCount(); i++) {
             transactiontbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+            transactiontbl.getColumnModel().getColumn(i).setCellRenderer(align);
         }
         retrieveData();
     }
@@ -186,13 +178,19 @@ public class Frame_overview extends javax.swing.JFrame {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int a = resultSet.getInt("transactionoverview_id");
-                int b = resultSet.getInt("employee_id");
+                String b = resultSet.getString("reception_name");
                 int c = resultSet.getInt("guest_id");
                 String d = resultSet.getString("transactiontype_paymentmode");
                 int e = resultSet.getInt("room_id");
                 Date f = resultSet.getDate("checkin_date");
                 Date g = resultSet.getDate("checkout_date");
-                Time h = resultSet.getTime("checkin_duration");    
+                String h = resultSet.getString("transactiontype");
+                if (b == null) {
+                    b = "N/A";
+                }
+                else if(d == null){
+                    d = "N/A";
+                }
                 retrievemodel.addRow(new Object[]{a, b, c, d, e, f, g, h});
             }
         }

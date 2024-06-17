@@ -22,7 +22,6 @@ import javax.swing.Timer;
 public class Frame_login extends javax.swing.JFrame {
 public static int attempts = 3;
 public static boolean loginAttempted = false;
-public static String login_name;
 public static String superuser = "admin", superpass = "admin";
     /**
      * Creates new form login_frame
@@ -325,6 +324,7 @@ public void login(){
         }
         else{
             verify(user,pass);
+            receipt_function.login_name = user;
         }
         loginAttempted = false;
 }

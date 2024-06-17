@@ -4,7 +4,23 @@
  */
 package netvince.diyatahotel.reception;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
+import netvince.diyatahotel.connect;
+import netvince.diyatahotel.receipt_function;
 import netvince.diyatahotel.reception.Dash_reception;
 
 /**
@@ -19,6 +35,8 @@ public class Frame_checkout extends javax.swing.JFrame {
     public Frame_checkout() {
         initComponents();
         setLocationRelativeTo(null);
+        table();
+        loadData();
     }
 
     /**
@@ -34,6 +52,13 @@ public class Frame_checkout extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        reservetbl = new javax.swing.JTable();
+        roomID = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        paymentMode = new javax.swing.JComboBox<>();
+        amount = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +91,105 @@ public class Frame_checkout extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(null);
+
+        jScrollPane1.setRowHeaderView(null);
+
+        reservetbl.setBackground(new java.awt.Color(0, 204, 204));
+        reservetbl.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        reservetbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Room ID", "Guest ID", "Guest First Name", "Guest Last Name", "Checkin Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        reservetbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        reservetbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        reservetbl.setRowHeight(50);
+        reservetbl.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        reservetbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        reservetbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        reservetbl.getTableHeader().setResizingAllowed(false);
+        reservetbl.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(reservetbl);
+        if (reservetbl.getColumnModel().getColumnCount() > 0) {
+            reservetbl.getColumnModel().getColumn(0).setResizable(false);
+            reservetbl.getColumnModel().getColumn(1).setResizable(false);
+            reservetbl.getColumnModel().getColumn(2).setResizable(false);
+            reservetbl.getColumnModel().getColumn(3).setResizable(false);
+            reservetbl.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(50, 20, 500, 280);
+
+        roomID.setBackground(new java.awt.Color(0, 204, 204));
+        roomID.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        roomID.setForeground(new java.awt.Color(0, 0, 0));
+        roomID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(roomID);
+        roomID.setBounds(120, 310, 160, 50);
+
+        jLabel2.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Room #");
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel2.setOpaque(true);
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(50, 310, 70, 50);
+
+        jButton3.setBackground(new java.awt.Color(153, 255, 255));
+        jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setText("Check Out");
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3);
+        jButton3.setBounds(50, 370, 500, 70);
+
+        paymentMode.setBackground(new java.awt.Color(0, 204, 204));
+        paymentMode.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        paymentMode.setForeground(new java.awt.Color(0, 0, 0));
+        paymentMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
+        jPanel2.add(paymentMode);
+        paymentMode.setBounds(430, 310, 120, 50);
+
+        amount.setBackground(new java.awt.Color(0, 204, 204));
+        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        amount.setForeground(new java.awt.Color(0, 0, 0));
+        amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        amount.setText("Amount");
+        amount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                amountFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                amountFocusLost(evt);
+            }
+        });
+        amount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                amountKeyPressed(evt);
+            }
+        });
+        jPanel2.add(amount);
+        amount.setBounds(320, 310, 110, 50);
+
         jPanel1.add(jPanel2);
         jPanel2.setBounds(100, 160, 600, 470);
 
@@ -86,7 +210,107 @@ public class Frame_checkout extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void selected(String mode, int room, int amt){
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDate.format(formatter);
+        try {
+            Connection connection = netvince.diyatahotel.connect.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `transaction overview table`");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM `transaction overview table`");
+                ResultSet resultSet1 = preparedStatement1.executeQuery();
+                while(resultSet1.next()){
+                    int id = resultSet.getInt("rowCount");
+                    Date checkin = resultSet1.getDate("checkin_date");
+                    receipt_function.transaction_overview(receipt_function.login_name, id, mode, room, checkin, Date.valueOf(formattedDate),"Checkout");
+                    return;
+                }
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void loadData(){
+        try (Connection connection = DriverManager.getConnection(connect.url, connect.user, connect.password)) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `room table` WHERE `room_status` = 'Occupied' ORDER BY `room_id`");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            while(resultSet.next()) {
+                String value1 = resultSet.getString("room_id");
+                String value = resultSet.getString("room_status");
+                model.addElement(value1 + "  - "+value);
+                PreparedStatement upd = connection.prepareStatement("UPDATE `room table` SET `room_status`='Checkout' WHERE `room_id`=?");
+                upd.setString(1, value1);
+                upd.executeUpdate();
+            }
+            roomID.setModel(model);
+            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_id` FROM `transaction overview table`");
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+            DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
+            while(resultSet1.next()){
+                PreparedStatement preparedStatement2 = connection.prepareStatement("SELECT `guest_id` FROM `guest table` WHERE `guest_id` = ?");
+                preparedStatement2.setInt(1, resultSet1.getInt("guest_id"));
+                ResultSet resultSet2 = preparedStatement2.executeQuery();
+                while(resultSet2.next()){
+                    String guestId = resultSet2.getString("guest_id");
+                    model1.addElement(guestId);
+                }
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void table(){
+        TableCellRenderer rendererFromHeader = reservetbl.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer align = new DefaultTableCellRenderer();
+        align.setHorizontalAlignment(JLabel.CENTER);
+        reservetbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        int[] columnWidths = {100, 100, 150, 150, 200}; // Adjust these widths as per your preference
+        for (int i = 0; i < reservetbl.getColumnCount(); i++) {
+            reservetbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+            reservetbl.getColumnModel().getColumn(i).setCellRenderer(align);
+        }
+        retrieveData();
+    }
+    void retrieveData() {
+        DefaultTableModel retrievemodel = (DefaultTableModel) reservetbl.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(retrievemodel);
+        reservetbl.setRowSorter(sorter);
+        retrievemodel.setRowCount(0);
+        String url = connect.url;
+        String user = connect.user;
+        String password = connect.password;
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `room table` WHERE `room_status` = 'Occupied'");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM `transaction overview table`");
+                ResultSet resultSet1 = preparedStatement1.executeQuery();
+                while(resultSet1.next()){
+                    PreparedStatement preparedStatement2 = connection.prepareStatement("SELECT * FROM `guest table` WHERE `guest_id` = ?");
+                    preparedStatement2.setInt(1, resultSet1.getInt("guest_id"));
+                    ResultSet resultSet2 = preparedStatement2.executeQuery();
+                    while(resultSet2.next()){
+                    int room = resultSet.getInt("room_id");
+                    int guest = resultSet1.getInt("guest_id");
+                    String c = resultSet2.getString("guest_firstname");
+                    String d = resultSet2.getString("guest_lastname");
+                    Date date = resultSet1.getDate("checkin_date");
+                    retrievemodel.addRow(new Object[]{room,guest,c,d,date});
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int a = JOptionPane.showConfirmDialog(null,"Are you sure you want to return? Fill-up data will be lost.", "Returning to dashboard.", JOptionPane.YES_NO_OPTION);
@@ -95,6 +319,57 @@ public class Frame_checkout extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String mode = (String) paymentMode.getSelectedItem().toString();
+        int room = (int) Integer.parseInt(roomID.getSelectedItem().toString().substring(0,3).trim());
+        String amt = amount.getText();
+        if(amt.equals("Amount")){
+            JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
+        }
+        else{
+            selected(mode,room,Integer.parseInt(amt));
+            receipt_function.transaction_type(mode, "Checkout", "Paid");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void amountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_amountFocusGained
+        // TODO add your handling code here:
+        if(amount.getText().equals("Amount")){
+            amount.setText("");
+        }
+    }//GEN-LAST:event_amountFocusGained
+
+    private void amountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_amountFocusLost
+        // TODO add your handling code here:
+        if(amount.getText().isEmpty()){
+            amount.setText("Amount");
+        }
+    }//GEN-LAST:event_amountFocusLost
+
+    private void amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyPressed
+        // TODO add your handling code here:
+        String pn = amount.getText();
+        int l = pn.length();
+        char c = evt.getKeyChar();
+        if(Character.isDigit(c)){
+            if(l<6){
+                amount.setEditable(true);
+            }
+            else{
+                amount.setEditable(false);
+            }
+        }
+        else{
+            if(Character.isISOControl(c)){
+                amount.setEditable(true);
+            }
+            else{
+                amount.setEditable(false);
+            }
+        }
+    }//GEN-LAST:event_amountKeyPressed
 
     /**
      * @param args the command line arguments
@@ -259,9 +534,16 @@ public class Frame_checkout extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField amount;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> paymentMode;
+    private javax.swing.JTable reservetbl;
+    private javax.swing.JComboBox<String> roomID;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,13 +5,17 @@
 package netvince.diyatahotel.reception;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import netvince.diyatahotel.connect;
+import netvince.diyatahotel.receipt_function;
 import netvince.diyatahotel.reception.Dash_reception;
 
 /**
@@ -89,6 +93,9 @@ public static String level;
             Connection connection = netvince.diyatahotel.connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `room table` SET `room_status`='Occupied' WHERE `room_id`=?");
             preparedStatement.setInt(1,index);
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDate = currentDate.format(formatter);
             preparedStatement.executeUpdate();
             jButton2.setEnabled(true);
             jButton3.setEnabled(false);
@@ -358,6 +365,7 @@ public static String level;
         String add = address.getText();
         String room = jComboBox.getSelectedItem().toString().substring(0,3).trim();
         int roomindex = Integer.parseInt(room);
+        String item = (String) jComboBox.getSelectedItem().toString();
         int confirmation = JOptionPane.showConfirmDialog(null, "Are the credentials entered final?", "Checking in.", JOptionPane.YES_NO_OPTION);
         if (confirmation == JOptionPane.OK_OPTION) {
         if(name1.equals("First Name")
@@ -366,71 +374,96 @@ public static String level;
         ||add.equals("Address")){
             JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
         }
-        else if(jComboBox.getSelectedItem().toString().contains("Reserved")
-            ||!name1.equals("First Name")
+        else if(!name1.equals("First Name")
             ||!name2.equals("Last Name")
             ||!em.equals("Email")
             ||!add.equals("Address")){
-            try {
+            if(item.contains("Reserved")){
+                try {
                     Connection connection = netvince.diyatahotel.connect.getConnection();
-                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
-                    + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
+                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname` "
+                    + "FROM `reservation table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
                     preparedStatement.setString(1,name1);
                     preparedStatement.setString(2,name2);
                     ResultSet resultSet = preparedStatement.executeQuery();
                     if(resultSet.next()){
-                    try {
-                    PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
-                    + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
-                    preparedStatement1.setString(1,name1);
-                    preparedStatement1.setString(2,name2);
-                    ResultSet resultSet1 = preparedStatement1.executeQuery();
-                        if(resultSet1.next()){
-                            JOptionPane.showMessageDialog(null, "This guest has checked in before!");
-                            checkin(roomindex);
+                        try {
+                        PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
+                        + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
+                        preparedStatement1.setString(1,name1);
+                        preparedStatement1.setString(2,name2);
+                        ResultSet resultSet1 = preparedStatement1.executeQuery();
+                        //TRANSACTIONS OVERVIEW
+                            LocalDate currentDate = LocalDate.now();
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            String formattedDate = currentDate.format(formatter);
+                            PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `guest table`");
+                            ResultSet Count = count.executeQuery();
+                            while(Count.next()){
+                            int rowCount = Count.getInt("rowCount");
+                                receipt_function.transaction_overview(receipt_function.login_name, rowCount + 1, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
+                                receipt_function.transaction_type("N/A", "Checkin", "Pending");
+                            }
+                        //
+                            if(resultSet1.next()){
+                                JOptionPane.showMessageDialog(null, "This guest has checked in before!");
+                                checkin(roomindex);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Room checked in.");
+                                guestTable(name1, name2, em, add);
+                                checkin(roomindex);
+                            }
                         }
-                        else{
-                            guestTable(name1, name2, em, add);
-                            checkin(Integer.parseInt(room.trim()));
+                        catch (SQLException e) {
+                            e.printStackTrace();
                         }
-                    }
-                    catch (SQLException e) {
-                        e.printStackTrace();
-                    }
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "This room is already reserved for someone else.","This room is already reserved",DO_NOTHING_ON_CLOSE);
                     }
                 }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        else if(!name1.equals("First Name")
-                ||!name2.equals("Last Name")
-                ||!em.equals("Email")
-                ||!add.equals("Address")){
-                    try {
-                    Connection connection = netvince.diyatahotel.connect.getConnection();
-                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
-                    + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
-                    preparedStatement.setString(1,name1);
-                    preparedStatement.setString(2,name2);
-                    ResultSet resultSet1 = preparedStatement.executeQuery();
-                        if(resultSet1.next()){
-                            JOptionPane.showMessageDialog(null, "This guest has checked in before!");
-                            checkin(jComboBox.getSelectedIndex());
-                        }
-                        else{
-                            guestTable(name1, name2, em, add);
-                            checkin(Integer.parseInt(room.trim()));
-                        }
-                    }
-                    catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
+            else if(item.contains("Unoccupied")){
+                    try {
+                        Connection connection = netvince.diyatahotel.connect.getConnection();
+                        PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_firstname`,`guest_lastname`"
+                        + "FROM `guest table` WHERE `guest_firstname` = ? AND `guest_lastname` = ?");
+                        preparedStatement1.setString(1,name1);
+                        preparedStatement1.setString(2,name2);
+                        ResultSet resultSet1 = preparedStatement1.executeQuery();
+                        //TRANSACTIONS OVERVIEW
+                            LocalDate currentDate = LocalDate.now();
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            String formattedDate = currentDate.format(formatter);
+                            PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `guest table`");
+                            ResultSet Count = count.executeQuery();
+                            while(Count.next()){
+                            int rowCount = Count.getInt("rowCount");
+                                receipt_function.transaction_overview(receipt_function.login_name, rowCount, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
+                                receipt_function.transaction_type("N/A", "Checkin", "Pending");
+
+                            }
+                        //
+                            if(resultSet1.next()){
+                                JOptionPane.showMessageDialog(null, "This guest has checked in before!");
+                                checkin(roomindex);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Room checked in.");
+                                guestTable(name1, name2, em, add);
+                                checkin(roomindex);
+                            }
+                        }
+                        catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+            }
+        }
+        }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

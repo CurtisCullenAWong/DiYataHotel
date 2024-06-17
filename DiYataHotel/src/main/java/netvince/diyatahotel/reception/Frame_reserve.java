@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import netvince.diyatahotel.connect;
+import netvince.diyatahotel.receipt_function;
 
 /**
  *
@@ -50,6 +51,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         amount = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
         lname = new javax.swing.JTextField();
@@ -91,6 +93,13 @@ public class Frame_reserve extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(null);
 
+        jComboBox1.setBackground(new java.awt.Color(0, 204, 204));
+        jComboBox1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
+        jPanel2.add(jComboBox1);
+        jComboBox1.setBounds(140, 110, 140, 50);
+
         amount.setBackground(new java.awt.Color(0, 204, 204));
         amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         amount.setForeground(new java.awt.Color(0, 0, 0));
@@ -110,7 +119,7 @@ public class Frame_reserve extends javax.swing.JFrame {
             }
         });
         jPanel2.add(amount);
-        amount.setBounds(50, 110, 200, 50);
+        amount.setBounds(50, 110, 80, 50);
 
         fname.setBackground(new java.awt.Color(0, 204, 204));
         fname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
@@ -149,7 +158,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(jComboBox);
-        jComboBox.setBounds(350, 110, 200, 50);
+        jComboBox.setBounds(410, 110, 140, 50);
 
         jLabel2.setBackground(new java.awt.Color(0, 204, 204));
         jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
@@ -159,7 +168,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(260, 110, 80, 50);
+        jLabel2.setBounds(320, 110, 80, 50);
 
         jButton3.setBackground(new java.awt.Color(153, 255, 255));
         jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
@@ -236,8 +245,8 @@ public class Frame_reserve extends javax.swing.JFrame {
     public void reserve(int index,String name1,String name2, double amount){
         try {
                 Connection connection = netvince.diyatahotel.connect.getConnection();
-                    PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `reservation table`");
-                    ResultSet resultSet = preparedStatement1.executeQuery();
+                    PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `reservation table`");
+                    ResultSet resultSet = count.executeQuery();
                     while(resultSet.next()){
                     int rowCount = resultSet.getInt("rowCount");
                     PreparedStatement preparedStatement = connection.prepareStatement(
@@ -264,9 +273,9 @@ public class Frame_reserve extends javax.swing.JFrame {
                     dispose();
                     }
             }
-            catch (SQLException e) {
-            e.printStackTrace();
-            }
+        catch (SQLException e) {
+        e.printStackTrace();
+        }
     }
     public void loadData(){
         try (Connection connection = DriverManager.getConnection(connect.url, connect.user, connect.password)) {
@@ -291,16 +300,11 @@ public class Frame_reserve extends javax.swing.JFrame {
         headerLabel.setHorizontalAlignment(JLabel.CENTER);
         DefaultTableCellRenderer align = new DefaultTableCellRenderer();
         align.setHorizontalAlignment(JLabel.CENTER);
-        reservetbl.getColumnModel().getColumn(0).setCellRenderer(align);
-        reservetbl.getColumnModel().getColumn(1).setCellRenderer(align);
-        reservetbl.getColumnModel().getColumn(2).setCellRenderer(align);
-        reservetbl.getColumnModel().getColumn(3).setCellRenderer(align);
-        reservetbl.getColumnModel().getColumn(4).setCellRenderer(align);
-        reservetbl.getColumnModel().getColumn(5).setCellRenderer(align);
         reservetbl.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         int[] columnWidths = {100, 200, 200, 200, 100, 150, 150}; // Adjust these widths as per your preference
         for (int i = 0; i < reservetbl.getColumnCount(); i++) {
             reservetbl.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+            reservetbl.getColumnModel().getColumn(i).setCellRenderer(align);
         }
         retrieveData();
     }
@@ -312,7 +316,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         String url = connect.url;
         String user = connect.user;
         String password = connect.password;
-
+        
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT * FROM `reservation table`";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -373,7 +377,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         String name1 = fname.getText();
         String name2 = lname.getText();
         String amt = amount.getText();
-        double amount = Double.parseDouble(amt);
+        String mode = (String) jComboBox1.getSelectedItem().toString();
         int index = (int) Integer.parseInt(jComboBox.getSelectedItem().toString().substring(0,3).trim());
         if(name1.equals("First Name")
             ||name2.equals("Last Name")
@@ -383,9 +387,28 @@ public class Frame_reserve extends javax.swing.JFrame {
         else if(!name1.equals("First Name")
             ||!name2.equals("Last Name")
             ||!amt.equals("Amount")){
+            double amount = Double.parseDouble(amt);
             int confirmation = JOptionPane.showConfirmDialog(null, "Are the credentials entered final?", "Checking in.", JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.OK_OPTION) {
-                reserve(index,name1,name2,amount);
+                try {
+                Connection connection = netvince.diyatahotel.connect.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `reservation table`");
+                ResultSet resultSet = preparedStatement.executeQuery();
+                    while(resultSet.next()){
+                        int rowCount = resultSet.getInt("rowCount");
+                        LocalDate currentDate = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String formattedDate = currentDate.format(formatter);
+                        receipt_function.transaction_overview(receipt_function.login_name, 0, mode, index, null, null,"Checkin");
+                        receipt_function.transaction(rowCount,mode,Date.valueOf(formattedDate),0,amount,0);
+                        receipt_function.transaction_type(mode, "Reservation", "Paid");
+                        reserve(index,name1,name2,amount);
+                    }
+                }
+                catch (SQLException e) {
+                e.printStackTrace();
+                }
+                return;
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -468,6 +491,7 @@ public class Frame_reserve extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
