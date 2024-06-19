@@ -179,7 +179,7 @@ public class Frame_checkout extends javax.swing.JFrame {
                     upd.setString(1, Integer.toString(room));
                     upd.executeUpdate();
                     receipt_function.transaction_overview(receipt_function.login_name, id, mode, room, checkin, Date.valueOf(formattedDate),"Checkout");
-                    receipt_function.transaction(mode,Date.valueOf(formattedDate),amt,amt,0);
+                    receipt_function.transaction(mode,Date.valueOf(formattedDate),amt,0);
                     return;
                 }
             }

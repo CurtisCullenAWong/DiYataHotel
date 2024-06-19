@@ -392,7 +392,7 @@ public class Frame_reserve extends javax.swing.JFrame {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String formattedDate = currentDate.format(formatter);
                 receipt_function.transaction_overview(receipt_function.login_name, null, mode, index, null, null,"Reservation");
-                receipt_function.transaction(mode,Date.valueOf(formattedDate),0,amount,0);
+                receipt_function.transaction(mode,Date.valueOf(formattedDate),0,amount);
                 receipt_function.transaction_type(mode, "Reservation", "Paid");
                 reserve(index,name1,name2,amount);
                 return;

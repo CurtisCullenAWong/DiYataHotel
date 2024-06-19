@@ -39,25 +39,26 @@ public class receipt_function {
             e.printStackTrace();
             }
     }
-    public static void transaction(String mode, Date date, double appfee, double amtfee, double total){
+    public static void transaction(String mode, Date date, double appfee, double amtfee){
         try {
                 Connection connection = netvince.diyatahotel.connect.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `financial transactions table`");
                     ResultSet resultSet = preparedStatement.executeQuery();
                     while(resultSet.next()){
                     int rowCount = resultSet.getInt("rowCount");
+                    rowCount+=1;
+                    double total = appfee+amtfee;
                     PreparedStatement add = connection.prepareStatement(
                     "INSERT INTO `financial transactions table`"
                     + "(`transactions_id`, `transaction_paymentmode`,"
                     + "`transaction_date`, `transaction_applicablefee`,"
                     + "`transaction_amountfee`, `transaction_totalamount`)"
                     + "VALUES (?,?,?,?,?,?)");
-                    add.setInt(1, rowCount + 1);
+                    add.setInt(1, rowCount);
                     add.setString(2, mode);
                     add.setDate(3, date);
                     add.setDouble(4, appfee);
                     add.setDouble(5, amtfee);
-                    total = appfee+amtfee;
                     add.setDouble(6, total);
                     add.executeUpdate();
                     }
