@@ -401,7 +401,8 @@ public static String level;
                             ResultSet Count = count.executeQuery();
                             while(Count.next()){
                             int rowCount = Count.getInt("rowCount");
-                                receipt_function.transaction_overview(receipt_function.login_name, rowCount + 1, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
+                            String value = Integer.toString(rowCount);
+                                receipt_function.transaction_overview(receipt_function.login_name, value, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
                                 receipt_function.transaction_type("N/A", "Checkin", "Pending");
                             }
                         //
@@ -442,8 +443,9 @@ public static String level;
                             PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `guest table`");
                             ResultSet Count = count.executeQuery();
                             while(Count.next()){
-                            int rowCount = Count.getInt("rowCount");
-                                receipt_function.transaction_overview(receipt_function.login_name, rowCount, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
+                            int rowCount = Count.getInt("rowCount") + 1;
+                            String value = Integer.toString(rowCount);
+                                receipt_function.transaction_overview(receipt_function.login_name, value, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
                                 receipt_function.transaction_type("N/A", "Checkin", "Pending");
 
                             }

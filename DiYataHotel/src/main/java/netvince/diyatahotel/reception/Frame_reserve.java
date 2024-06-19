@@ -52,7 +52,6 @@ public class Frame_reserve extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        amount = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
         lname = new javax.swing.JTextField();
         jComboBox = new javax.swing.JComboBox<>();
@@ -60,6 +59,8 @@ public class Frame_reserve extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         reservetbl = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        amount = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,28 +99,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
         jPanel2.add(jComboBox1);
-        jComboBox1.setBounds(140, 110, 140, 50);
-
-        amount.setBackground(new java.awt.Color(0, 204, 204));
-        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
-        amount.setForeground(new java.awt.Color(0, 0, 0));
-        amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        amount.setText("Amount");
-        amount.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                amountFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                amountFocusLost(evt);
-            }
-        });
-        amount.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                amountKeyPressed(evt);
-            }
-        });
-        jPanel2.add(amount);
-        amount.setBounds(50, 110, 80, 50);
+        jComboBox1.setBounds(170, 110, 110, 50);
 
         fname.setBackground(new java.awt.Color(0, 204, 204));
         fname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
@@ -223,6 +203,24 @@ public class Frame_reserve extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(50, 190, 500, 150);
+
+        jLabel3.setBackground(new java.awt.Color(153, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Room Rates:");
+        jLabel3.setToolTipText("");
+        jLabel3.setOpaque(true);
+        jLabel3.setPreferredSize(new java.awt.Dimension(300, 300));
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(50, 80, 110, 30);
+
+        amount.setBackground(new java.awt.Color(0, 204, 204));
+        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        amount.setForeground(new java.awt.Color(0, 0, 0));
+        amount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1500", "2000", "2500", "3000", "4000", "4500", "5000" }));
+        jPanel2.add(amount);
+        amount.setBounds(50, 110, 110, 50);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(100, 160, 600, 470);
@@ -376,7 +374,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         // TODO add your handling code here:
         String name1 = fname.getText();
         String name2 = lname.getText();
-        String amt = amount.getText();
+        String amt = (String) amount.getSelectedItem().toString();
         String mode = (String) jComboBox1.getSelectedItem().toString();
         int index = (int) Integer.parseInt(jComboBox.getSelectedItem().toString().substring(0,3).trim());
         if(name1.equals("First Name")
@@ -390,65 +388,17 @@ public class Frame_reserve extends javax.swing.JFrame {
             double amount = Double.parseDouble(amt);
             int confirmation = JOptionPane.showConfirmDialog(null, "Are the credentials entered final?", "Checking in.", JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.OK_OPTION) {
-                try {
-                Connection connection = netvince.diyatahotel.connect.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `reservation table`");
-                ResultSet resultSet = preparedStatement.executeQuery();
-                    while(resultSet.next()){
-                        int rowCount = resultSet.getInt("rowCount");
-                        LocalDate currentDate = LocalDate.now();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        String formattedDate = currentDate.format(formatter);
-                        receipt_function.transaction_overview(receipt_function.login_name, 0, mode, index, null, null,"Checkin");
-                        receipt_function.transaction(rowCount,mode,Date.valueOf(formattedDate),0,amount,0);
-                        receipt_function.transaction_type(mode, "Reservation", "Paid");
-                        reserve(index,name1,name2,amount);
-                    }
-                }
-                catch (SQLException e) {
-                e.printStackTrace();
-                }
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String formattedDate = currentDate.format(formatter);
+                receipt_function.transaction_overview(receipt_function.login_name, null, mode, index, null, null,"Reservation");
+                receipt_function.transaction(mode,Date.valueOf(formattedDate),0,amount,0);
+                receipt_function.transaction_type(mode, "Reservation", "Paid");
+                reserve(index,name1,name2,amount);
                 return;
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void amountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_amountFocusGained
-        // TODO add your handling code here:
-        if(amount.getText().equals("Amount")){
-            amount.setText("");
-        }
-    }//GEN-LAST:event_amountFocusGained
-
-    private void amountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_amountFocusLost
-        // TODO add your handling code here:
-        if(amount.getText().isEmpty()){
-            amount.setText("Amount");
-        }
-    }//GEN-LAST:event_amountFocusLost
-
-    private void amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyPressed
-        // TODO add your handling code here:
-        String pn = amount.getText();
-        int l = pn.length();
-        char c = evt.getKeyChar();
-        if(Character.isDigit(c)){
-            if(l<6){
-                amount.setEditable(true);
-            }
-            else{
-                amount.setEditable(false);
-            }
-        }
-        else{
-            if(Character.isISOControl(c)){
-                amount.setEditable(true);
-            }
-            else{
-                amount.setEditable(false);
-            }
-        }
-    }//GEN-LAST:event_amountKeyPressed
 
     /**
      * @param args the command line arguments
@@ -486,7 +436,7 @@ public class Frame_reserve extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField amount;
+    private javax.swing.JComboBox<String> amount;
     private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -494,6 +444,7 @@ public class Frame_reserve extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

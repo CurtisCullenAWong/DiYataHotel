@@ -13,12 +13,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableRowSorter;
 import netvince.diyatahotel.connect;
 import netvince.diyatahotel.receipt_function;
 import netvince.diyatahotel.reception.Dash_reception;
@@ -51,11 +46,12 @@ public class Frame_checkout extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        amount = new javax.swing.JComboBox<>();
         roomID = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         paymentMode = new javax.swing.JComboBox<>();
-        amount = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +85,13 @@ public class Frame_checkout extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(null);
 
+        amount.setBackground(new java.awt.Color(0, 204, 204));
+        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
+        amount.setForeground(new java.awt.Color(0, 0, 0));
+        amount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1500", "2000", "2500", "3000", "4000", "4500", "5000" }));
+        jPanel2.add(amount);
+        amount.setBounds(60, 190, 260, 90);
+
         roomID.setBackground(new java.awt.Color(0, 204, 204));
         roomID.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
         roomID.setForeground(new java.awt.Color(0, 0, 0));
@@ -104,7 +107,7 @@ public class Frame_checkout extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(50, 40, 170, 90);
+        jLabel2.setBounds(60, 40, 140, 90);
 
         jButton3.setBackground(new java.awt.Color(153, 255, 255));
         jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
@@ -124,28 +127,18 @@ public class Frame_checkout extends javax.swing.JFrame {
         paymentMode.setForeground(new java.awt.Color(0, 0, 0));
         paymentMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
         jPanel2.add(paymentMode);
-        paymentMode.setBounds(270, 190, 280, 90);
+        paymentMode.setBounds(330, 190, 220, 90);
 
-        amount.setBackground(new java.awt.Color(0, 204, 204));
-        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
-        amount.setForeground(new java.awt.Color(0, 0, 0));
-        amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        amount.setText("Amount");
-        amount.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                amountFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                amountFocusLost(evt);
-            }
-        });
-        amount.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                amountKeyPressed(evt);
-            }
-        });
-        jPanel2.add(amount);
-        amount.setBounds(50, 190, 200, 90);
+        jLabel3.setBackground(new java.awt.Color(153, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Room Rates:");
+        jLabel3.setToolTipText("");
+        jLabel3.setOpaque(true);
+        jLabel3.setPreferredSize(new java.awt.Dimension(300, 300));
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(60, 140, 160, 50);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(100, 160, 600, 470);
@@ -173,15 +166,20 @@ public class Frame_checkout extends javax.swing.JFrame {
         String formattedDate = currentDate.format(formatter);
         try {
             Connection connection = netvince.diyatahotel.connect.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `transaction overview table`");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_id` FROM `transaction overview table` WHERE room_id = ? ORDER BY room_id DESC LIMIT 1");
+            preparedStatement.setString(1,Integer.toString(room));
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM `transaction overview table`");
                 ResultSet resultSet1 = preparedStatement1.executeQuery();
                 while(resultSet1.next()){
-                    int id = resultSet.getInt("rowCount");
+                    String id = resultSet.getString("guest_id");
                     Date checkin = resultSet1.getDate("checkin_date");
+                    PreparedStatement upd = connection.prepareStatement("UPDATE `room table` SET `room_status`='Checkout' WHERE `room_id`=?");
+                    upd.setString(1, Integer.toString(room));
+                    upd.executeUpdate();
                     receipt_function.transaction_overview(receipt_function.login_name, id, mode, room, checkin, Date.valueOf(formattedDate),"Checkout");
+                    receipt_function.transaction(mode,Date.valueOf(formattedDate),amt,amt,0);
                     return;
                 }
             }
@@ -197,25 +195,10 @@ public class Frame_checkout extends javax.swing.JFrame {
             DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
             while(resultSet.next()) {
                 String value1 = resultSet.getString("room_id");
-                String value = resultSet.getString("room_status");
+                String value = resultSet.getString("room_type");
                 model.addElement(value1 + "  - "+value);
-                PreparedStatement upd = connection.prepareStatement("UPDATE `room table` SET `room_status`='Checkout' WHERE `room_id`=?");
-                upd.setString(1, value1);
-                upd.executeUpdate();
             }
             roomID.setModel(model);
-            PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `guest_id` FROM `transaction overview table`");
-            ResultSet resultSet1 = preparedStatement1.executeQuery();
-            DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
-            while(resultSet1.next()){
-                PreparedStatement preparedStatement2 = connection.prepareStatement("SELECT `guest_id` FROM `guest table` WHERE `guest_id` = ?");
-                preparedStatement2.setInt(1, resultSet1.getInt("guest_id"));
-                ResultSet resultSet2 = preparedStatement2.executeQuery();
-                while(resultSet2.next()){
-                    String guestId = resultSet2.getString("guest_id");
-                    model1.addElement(guestId);
-                }
-            }
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -233,8 +216,8 @@ public class Frame_checkout extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String mode = (String) paymentMode.getSelectedItem().toString();
-        int room = (int) Integer.parseInt(roomID.getSelectedItem().toString().substring(0,3).trim());
-        String amt = amount.getText();
+        int room = Integer.parseInt((String)roomID.getSelectedItem().toString().substring(0,2).trim());
+        String amt = (String) amount.getSelectedItem().toString();
         if(amt.equals("Amount")){
             JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
         }
@@ -245,43 +228,6 @@ public class Frame_checkout extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void amountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_amountFocusGained
-        // TODO add your handling code here:
-        if(amount.getText().equals("Amount")){
-            amount.setText("");
-        }
-    }//GEN-LAST:event_amountFocusGained
-
-    private void amountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_amountFocusLost
-        // TODO add your handling code here:
-        if(amount.getText().isEmpty()){
-            amount.setText("Amount");
-        }
-    }//GEN-LAST:event_amountFocusLost
-
-    private void amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyPressed
-        // TODO add your handling code here:
-        String pn = amount.getText();
-        int l = pn.length();
-        char c = evt.getKeyChar();
-        if(Character.isDigit(c)){
-            if(l<6){
-                amount.setEditable(true);
-            }
-            else{
-                amount.setEditable(false);
-            }
-        }
-        else{
-            if(Character.isISOControl(c)){
-                amount.setEditable(true);
-            }
-            else{
-                amount.setEditable(false);
-            }
-        }
-    }//GEN-LAST:event_amountKeyPressed
 
     /**
      * @param args the command line arguments
@@ -446,11 +392,12 @@ public class Frame_checkout extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField amount;
+    private javax.swing.JComboBox<String> amount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> paymentMode;

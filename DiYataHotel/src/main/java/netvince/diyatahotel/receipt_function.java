@@ -39,7 +39,7 @@ public class receipt_function {
             e.printStackTrace();
             }
     }
-    public static void transaction(int typeid, String mode, Date date, double appfee, double amtfee, double total){
+    public static void transaction(String mode, Date date, double appfee, double amtfee, double total){
         try {
                 Connection connection = netvince.diyatahotel.connect.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `financial transactions table`");
@@ -66,7 +66,7 @@ public class receipt_function {
             e.printStackTrace();
             }
     }
-    public static void transaction_overview(String recpname, int guestID, String mode, int roomID, Date checkin, Date checkout,String type){
+    public static void transaction_overview(String recpname, String guestID, String mode, int roomID, Date checkin, Date checkout,String type){
         try {
                 Connection connection = netvince.diyatahotel.connect.getConnection();
                         PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS rowCount FROM `transaction overview table`");
@@ -82,7 +82,7 @@ public class receipt_function {
                     + "VALUES (?,?,?,?,?,?,?,?)");
                     add.setInt(1, rowCount + 1);
                     add.setString(2, recpname);
-                    add.setInt(3, guestID);
+                    add.setString(3, guestID);
                     add.setString(4, mode);
                     add.setInt(5, roomID);
                     add.setDate(6, checkin);
