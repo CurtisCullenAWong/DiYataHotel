@@ -7,8 +7,8 @@ import java.sql.*;
 public class connect {
 
     public static final String url = "jdbc:mysql://localhost:3306/hms";
-    public static final String user = "admin";
-    public static final String password = "admin";
+    public static final String user = "root";
+    public static final String password = "";
 
     public static Connection getConnection() {
         Connection connection = null;
