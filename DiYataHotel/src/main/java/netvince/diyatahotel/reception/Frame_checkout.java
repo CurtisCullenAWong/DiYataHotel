@@ -166,7 +166,7 @@ public class Frame_checkout extends javax.swing.JFrame {
         String formattedDate = currentDate.format(formatter);
         try {
             Connection connection = netvince.diyatahotel.connect.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_id` FROM `transaction overview table` WHERE room_id = ? ORDER BY room_id DESC LIMIT 1");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_id` FROM `transaction overview table` WHERE `guest_id` = ? ORDER BY `guest_id` DESC LIMIT 1");
             preparedStatement.setString(1,Integer.toString(room));
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
