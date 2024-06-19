@@ -99,7 +99,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
         jPanel2.add(jComboBox1);
-        jComboBox1.setBounds(170, 110, 110, 50);
+        jComboBox1.setBounds(180, 110, 100, 50);
 
         fname.setBackground(new java.awt.Color(0, 204, 204));
         fname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
@@ -138,7 +138,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(jComboBox);
-        jComboBox.setBounds(410, 110, 140, 50);
+        jComboBox.setBounds(390, 110, 160, 50);
 
         jLabel2.setBackground(new java.awt.Color(0, 204, 204));
         jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
@@ -148,7 +148,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(320, 110, 80, 50);
+        jLabel2.setBounds(320, 110, 60, 50);
 
         jButton3.setBackground(new java.awt.Color(153, 255, 255));
         jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
@@ -220,7 +220,7 @@ public class Frame_reserve extends javax.swing.JFrame {
         amount.setForeground(new java.awt.Color(0, 0, 0));
         amount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1500", "2000", "2500", "3000", "4000", "4500", "5000" }));
         jPanel2.add(amount);
-        amount.setBounds(50, 110, 110, 50);
+        amount.setBounds(50, 110, 120, 50);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(100, 160, 600, 470);
@@ -283,7 +283,7 @@ public class Frame_reserve extends javax.swing.JFrame {
             DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
             while (resultSet.next()) {
                 String value1 = resultSet.getString("room_id");
-                String value = resultSet.getString("room_status");
+                String value = resultSet.getString("room_type");
                 model.addElement(value1 + "  - "+value);
             }
             jComboBox.setModel(model);

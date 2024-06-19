@@ -93,9 +93,6 @@ public static String level;
             Connection connection = netvince.diyatahotel.connect.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `room table` SET `room_status`='Occupied' WHERE `room_id`=?");
             preparedStatement.setInt(1,index);
-            LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String formattedDate = currentDate.format(formatter);
             preparedStatement.executeUpdate();
             jButton2.setEnabled(true);
             jButton3.setEnabled(false);
@@ -405,7 +402,7 @@ public static String level;
                                 receipt_function.transaction_overview(receipt_function.login_name, value, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
                                 receipt_function.transaction_type("N/A", "Checkin", "Pending");
                             }
-                        //
+                        //  
                             if(resultSet1.next()){
                                 JOptionPane.showMessageDialog(null, "This guest has checked in before!");
                                 checkin(roomindex);
