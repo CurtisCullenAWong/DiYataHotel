@@ -59,11 +59,12 @@ public class Frame_loyalty extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Guest Loyalty Overview");
@@ -71,10 +72,10 @@ public class Frame_loyalty extends javax.swing.JFrame {
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 30, 600, 100);
+        jLabel1.setBounds(0, 0, 700, 100);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("RETURN");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -84,14 +85,14 @@ public class Frame_loyalty extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 660, 160, 70);
+        jButton1.setBounds(510, 460, 160, 60);
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setLayout(null);
 
         jScrollPane1.setRowHeaderView(null);
 
-        loyaltytbl.setBackground(new java.awt.Color(0, 204, 204));
+        loyaltytbl.setBackground(new java.awt.Color(255, 204, 204));
         loyaltytbl.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
         loyaltytbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,25 +131,28 @@ public class Frame_loyalty extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(10, 10, 430, 450);
 
-        jComboBox.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(20, 110, 450, 470);
+
+        jComboBox.setBackground(new java.awt.Color(255, 204, 204));
         jComboBox.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox);
-        jComboBox.setBounds(450, 70, 140, 50);
+        jPanel1.add(jComboBox);
+        jComboBox.setBounds(520, 230, 140, 50);
 
-        jLabel2.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel2.setBackground(new java.awt.Color(255, 204, 204));
         jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Guest ID #");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(470, 10, 100, 50);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(520, 170, 140, 50);
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 255));
-        jButton2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Apply Loyalty");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -157,24 +161,21 @@ public class Frame_loyalty extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2);
-        jButton2.setBounds(450, 390, 140, 70);
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(100, 160, 600, 470);
+        jPanel1.add(jButton2);
+        jButton2.setBounds(500, 360, 180, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 

@@ -122,14 +122,15 @@ public static String level;
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Guest Checkin");
@@ -137,10 +138,10 @@ public static String level;
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 30, 600, 100);
+        jLabel1.setBounds(0, 0, 700, 100);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("RETURN");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -150,13 +151,13 @@ public static String level;
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 660, 160, 70);
+        jButton1.setBounds(10, 530, 160, 60);
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setLayout(null);
 
-        fname.setBackground(new java.awt.Color(0, 204, 204));
-        fname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        fname.setBackground(new java.awt.Color(255, 204, 204));
+        fname.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 14)); // NOI18N
         fname.setForeground(new java.awt.Color(0, 0, 0));
         fname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fname.setText("First Name");
@@ -169,10 +170,10 @@ public static String level;
             }
         });
         jPanel2.add(fname);
-        fname.setBounds(50, 30, 230, 50);
+        fname.setBounds(20, 10, 230, 50);
 
-        lname.setBackground(new java.awt.Color(0, 204, 204));
-        lname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        lname.setBackground(new java.awt.Color(255, 204, 204));
+        lname.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 14)); // NOI18N
         lname.setForeground(new java.awt.Color(0, 0, 0));
         lname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lname.setText("Last Name");
@@ -185,10 +186,10 @@ public static String level;
             }
         });
         jPanel2.add(lname);
-        lname.setBounds(320, 30, 230, 50);
+        lname.setBounds(300, 10, 230, 50);
 
-        email.setBackground(new java.awt.Color(0, 204, 204));
-        email.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        email.setBackground(new java.awt.Color(255, 204, 204));
+        email.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 14)); // NOI18N
         email.setForeground(new java.awt.Color(0, 0, 0));
         email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         email.setText("Email");
@@ -201,10 +202,12 @@ public static String level;
             }
         });
         jPanel2.add(email);
-        email.setBounds(50, 120, 230, 50);
+        email.setBounds(20, 90, 230, 50);
 
+        address.setBackground(new java.awt.Color(255, 204, 204));
         address.setColumns(20);
-        address.setFont(new java.awt.Font("Imprint MT Shadow", 0, 18)); // NOI18N
+        address.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
+        address.setForeground(new java.awt.Color(0, 0, 0));
         address.setLineWrap(true);
         address.setRows(5);
         address.setText("Address");
@@ -219,27 +222,27 @@ public static String level;
         jScrollPane1.setViewportView(address);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(50, 210, 500, 100);
+        jScrollPane1.setBounds(20, 170, 500, 50);
 
-        jComboBox.setBackground(new java.awt.Color(0, 204, 204));
-        jComboBox.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jComboBox.setBackground(new java.awt.Color(255, 204, 204));
+        jComboBox.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 14)); // NOI18N
         jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(jComboBox);
-        jComboBox.setBounds(390, 120, 160, 50);
+        jComboBox.setBounds(370, 90, 160, 50);
 
-        jLabel2.setBackground(new java.awt.Color(0, 204, 204));
-        jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jLabel2.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Room #");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(320, 120, 70, 50);
+        jLabel2.setBounds(300, 90, 70, 50);
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 255));
-        jButton2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Apply for Loyalty");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -249,10 +252,10 @@ public static String level;
             }
         });
         jPanel2.add(jButton2);
-        jButton2.setBounds(50, 360, 230, 70);
+        jButton2.setBounds(10, 240, 290, 50);
 
-        jButton3.setBackground(new java.awt.Color(153, 255, 255));
-        jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton3.setBackground(new java.awt.Color(255, 204, 204));
+        jButton3.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 24)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Check In");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -262,22 +265,25 @@ public static String level;
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(320, 360, 230, 70);
+        jButton3.setBounds(310, 240, 230, 50);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(100, 160, 600, 470);
+        jPanel2.setBounds(70, 170, 550, 310);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hotel Room Color Scheme Tips.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 70, 700, 560);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -398,7 +404,7 @@ public static String level;
                             ResultSet Count = count.executeQuery();
                             while(Count.next()){
                             int rowCount = Count.getInt("rowCount");
-                            String value = Integer.toString(rowCount);
+                            String value = Integer.toString(rowCount) + 1;
                                 receipt_function.transaction_overview(receipt_function.login_name, value, null, roomindex, Date.valueOf(formattedDate), null,"Checkin");
                                 receipt_function.transaction_type("N/A", "Checkin", "Pending");
                             }
@@ -574,6 +580,7 @@ public static String level;
     private javax.swing.JComboBox<String> jComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

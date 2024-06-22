@@ -42,26 +42,27 @@ public class Dash_admin extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 800));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Admin Dashboard");
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(150, 30, 500, 100);
+        jLabel1.setBounds(0, 0, 700, 100);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("LOGOUT");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -71,13 +72,13 @@ public class Dash_admin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 660, 160, 70);
+        jButton1.setBounds(10, 540, 170, 50);
 
-        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
         jPanel3.setLayout(null);
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 204));
-        jButton2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Transactions Overview");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -86,10 +87,10 @@ public class Dash_admin extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton2);
-        jButton2.setBounds(60, 40, 480, 100);
+        jButton2.setBounds(0, 0, 280, 100);
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 204));
-        jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        jButton3.setBackground(new java.awt.Color(255, 204, 204));
+        jButton3.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Room List");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -98,10 +99,10 @@ public class Dash_admin extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton3);
-        jButton3.setBounds(320, 170, 220, 100);
+        jButton3.setBounds(190, 100, 180, 100);
 
-        jButton6.setBackground(new java.awt.Color(0, 204, 204));
-        jButton6.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        jButton6.setBackground(new java.awt.Color(255, 204, 204));
+        jButton6.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Guest List");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -110,10 +111,10 @@ public class Dash_admin extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton6);
-        jButton6.setBounds(60, 170, 220, 100);
+        jButton6.setBounds(0, 100, 190, 100);
 
-        jButton4.setBackground(new java.awt.Color(0, 204, 204));
-        jButton4.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        jButton4.setBackground(new java.awt.Color(255, 204, 204));
+        jButton4.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Employee List");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -122,10 +123,10 @@ public class Dash_admin extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton4);
-        jButton4.setBounds(60, 310, 220, 100);
+        jButton4.setBounds(370, 100, 190, 100);
 
-        jButton5.setBackground(new java.awt.Color(0, 204, 204));
-        jButton5.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
+        jButton5.setBackground(new java.awt.Color(255, 204, 204));
+        jButton5.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Employee Application");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -134,16 +135,21 @@ public class Dash_admin extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton5);
-        jButton5.setBounds(320, 310, 220, 100);
+        jButton5.setBounds(280, 0, 280, 100);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(90, 170, 600, 470);
+        jPanel3.setBounds(70, 210, 560, 200);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dashboard.jpg"))); // NOI18N
+        jLabel2.setRequestFocusEnabled(false);
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 70, 700, 550);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,6 +248,7 @@ public class Dash_admin extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

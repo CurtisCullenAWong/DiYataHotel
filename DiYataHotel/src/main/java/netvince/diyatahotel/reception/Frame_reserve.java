@@ -4,6 +4,7 @@
  */
 package netvince.diyatahotel.reception;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -49,26 +50,29 @@ public class Frame_reserve extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         fname = new javax.swing.JTextField();
         lname = new javax.swing.JTextField();
         jComboBox = new javax.swing.JComboBox<>();
+        amount = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         reservetbl = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        amount = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 600));
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Reservation");
@@ -76,32 +80,19 @@ public class Frame_reserve extends javax.swing.JFrame {
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 30, 600, 100);
+        jLabel1.setBounds(0, 0, 700, 100);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("RETURN");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(320, 660, 160, 70);
-
-        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setLayout(null);
 
-        jComboBox1.setBackground(new java.awt.Color(0, 204, 204));
+        jComboBox1.setBackground(new java.awt.Color(255, 204, 204));
         jComboBox1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
         jPanel2.add(jComboBox1);
-        jComboBox1.setBounds(180, 110, 100, 50);
+        jComboBox1.setBounds(140, 110, 120, 50);
 
-        fname.setBackground(new java.awt.Color(0, 204, 204));
+        fname.setBackground(new java.awt.Color(255, 204, 204));
         fname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         fname.setForeground(new java.awt.Color(0, 0, 0));
         fname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -115,9 +106,9 @@ public class Frame_reserve extends javax.swing.JFrame {
             }
         });
         jPanel2.add(fname);
-        fname.setBounds(50, 30, 230, 50);
+        fname.setBounds(30, 10, 230, 50);
 
-        lname.setBackground(new java.awt.Color(0, 204, 204));
+        lname.setBackground(new java.awt.Color(255, 204, 204));
         lname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         lname.setForeground(new java.awt.Color(0, 0, 0));
         lname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -131,16 +122,31 @@ public class Frame_reserve extends javax.swing.JFrame {
             }
         });
         jPanel2.add(lname);
-        lname.setBounds(320, 30, 230, 50);
+        lname.setBounds(280, 10, 230, 50);
 
-        jComboBox.setBackground(new java.awt.Color(0, 204, 204));
+        jComboBox.setBackground(new java.awt.Color(255, 204, 204));
         jComboBox.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxActionPerformed(evt);
+            }
+        });
         jPanel2.add(jComboBox);
-        jComboBox.setBounds(390, 110, 160, 50);
+        jComboBox.setBounds(350, 110, 170, 50);
 
-        jLabel2.setBackground(new java.awt.Color(0, 204, 204));
+        amount.setBackground(new java.awt.Color(255, 204, 204));
+        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        amount.setForeground(new java.awt.Color(0, 0, 0));
+        amount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        amount.setText("Prices");
+        amount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        amount.setOpaque(true);
+        jPanel2.add(amount);
+        amount.setBounds(10, 110, 120, 50);
+
+        jLabel2.setBackground(new java.awt.Color(255, 204, 204));
         jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -148,9 +154,9 @@ public class Frame_reserve extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(320, 110, 60, 50);
+        jLabel2.setBounds(280, 110, 60, 50);
 
-        jButton3.setBackground(new java.awt.Color(153, 255, 255));
+        jButton3.setBackground(new java.awt.Color(255, 204, 204));
         jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Reserve The Room");
@@ -161,11 +167,11 @@ public class Frame_reserve extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(50, 360, 500, 70);
+        jButton3.setBounds(10, 340, 240, 60);
 
         jScrollPane1.setRowHeaderView(null);
 
-        reservetbl.setBackground(new java.awt.Color(0, 204, 204));
+        reservetbl.setBackground(new java.awt.Color(255, 204, 204));
         reservetbl.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
         reservetbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -202,40 +208,52 @@ public class Frame_reserve extends javax.swing.JFrame {
         }
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(50, 190, 500, 150);
+        jScrollPane1.setBounds(10, 170, 520, 150);
 
-        jLabel3.setBackground(new java.awt.Color(153, 255, 255));
+        jLabel3.setBackground(new java.awt.Color(255, 204, 204));
         jLabel3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Room Rates:");
         jLabel3.setToolTipText("");
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel3.setOpaque(true);
         jLabel3.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(50, 80, 110, 30);
+        jLabel3.setBounds(10, 65, 120, 40);
 
-        amount.setBackground(new java.awt.Color(0, 204, 204));
-        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
-        amount.setForeground(new java.awt.Color(0, 0, 0));
-        amount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1500", "2000", "2500", "3000", "4000", "4500", "5000" }));
-        jPanel2.add(amount);
-        amount.setBounds(50, 110, 120, 50);
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("RETURN");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(290, 340, 240, 60);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(100, 160, 600, 470);
+        jPanel2.setBounds(80, 120, 540, 430);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.jpg"))); // NOI18N
+        jLabel4.setText("jLabel3");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(0, 60, 700, 560);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
         );
 
         pack();
@@ -374,17 +392,17 @@ public class Frame_reserve extends javax.swing.JFrame {
         // TODO add your handling code here:
         String name1 = fname.getText();
         String name2 = lname.getText();
-        String amt = (String) amount.getSelectedItem().toString();
+        String amt = amount.getText();
         String mode = (String) jComboBox1.getSelectedItem().toString();
         int index = (int) Integer.parseInt(jComboBox.getSelectedItem().toString().substring(0,3).trim());
         if(name1.equals("First Name")
             ||name2.equals("Last Name")
-            ||amt.equals("Amount")){
+            ||amt.equals("Prices")){
             JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
         }
         else if(!name1.equals("First Name")
             ||!name2.equals("Last Name")
-            ||!amt.equals("Amount")){
+            ||!amt.equals("Prices")){
             double amount = Double.parseDouble(amt);
             int confirmation = JOptionPane.showConfirmDialog(null, "Are the credentials entered final?", "Checking in.", JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.OK_OPTION) {
@@ -399,6 +417,41 @@ public class Frame_reserve extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
+        // TODO add your handling code here:
+        String amt = (String) jComboBox.getSelectedItem().toString();
+        if(amt.contains("Single")){
+            amount.setText("1000");
+        }
+        else if(amt.contains("Double")){
+            amount.setText("2000");
+        }
+        else if(amt.contains("Twin")){
+            amount.setText("3000");
+        }
+        else if(amt.contains("Triple")){
+            amount.setText("4000");
+        }
+        else if(amt.contains("Suite")){
+            amount.setText("5000");
+        }
+        else if(amt.contains("Family")){
+            amount.setText("6000");
+        }
+        else if(amt.contains("Deluxe")){
+            amount.setText("7000");
+        }
+        else if(amt.contains("Superior")){
+            amount.setText("8000");
+        }
+        else if(amt.contains("Executive")){
+            amount.setText("9000");
+        }
+        //Single Room, Double Room, Twin Room, Triple Room, Suite,
+        //Family Room, Deluxe Room, Superior Room, Executive Room
+
+    }//GEN-LAST:event_jComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -436,7 +489,7 @@ public class Frame_reserve extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> amount;
+    private javax.swing.JLabel amount;
     private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -445,6 +498,7 @@ public class Frame_reserve extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

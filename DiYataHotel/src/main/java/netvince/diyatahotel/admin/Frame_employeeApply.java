@@ -37,7 +37,6 @@ public class Frame_employeeApply extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         fname = new javax.swing.JTextField();
         lname = new javax.swing.JTextField();
@@ -48,41 +47,30 @@ public class Frame_employeeApply extends javax.swing.JFrame {
         position = new javax.swing.JTextField();
         dept = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Dashboard");
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 800));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Employee Form");
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 30, 580, 100);
+        jLabel1.setBounds(0, 0, 700, 80);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("RETURN");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(310, 660, 160, 70);
-
-        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setPreferredSize(new java.awt.Dimension(700, 600));
         jPanel3.setLayout(null);
 
-        fname.setBackground(new java.awt.Color(0, 204, 204));
+        fname.setBackground(new java.awt.Color(204, 255, 255));
         fname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         fname.setForeground(new java.awt.Color(0, 0, 0));
         fname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -96,9 +84,9 @@ public class Frame_employeeApply extends javax.swing.JFrame {
             }
         });
         jPanel3.add(fname);
-        fname.setBounds(60, 30, 230, 50);
+        fname.setBounds(40, 30, 230, 50);
 
-        lname.setBackground(new java.awt.Color(0, 204, 204));
+        lname.setBackground(new java.awt.Color(204, 255, 255));
         lname.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         lname.setForeground(new java.awt.Color(0, 0, 0));
         lname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -114,7 +102,7 @@ public class Frame_employeeApply extends javax.swing.JFrame {
         jPanel3.add(lname);
         lname.setBounds(330, 30, 230, 50);
 
-        email.setBackground(new java.awt.Color(0, 204, 204));
+        email.setBackground(new java.awt.Color(204, 255, 255));
         email.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         email.setForeground(new java.awt.Color(0, 0, 0));
         email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -128,10 +116,12 @@ public class Frame_employeeApply extends javax.swing.JFrame {
             }
         });
         jPanel3.add(email);
-        email.setBounds(60, 110, 230, 50);
+        email.setBounds(40, 110, 230, 50);
 
+        address.setBackground(new java.awt.Color(204, 255, 255));
         address.setColumns(20);
         address.setFont(new java.awt.Font("Imprint MT Shadow", 0, 18)); // NOI18N
+        address.setForeground(new java.awt.Color(0, 0, 0));
         address.setLineWrap(true);
         address.setRows(5);
         address.setText("Address");
@@ -146,9 +136,9 @@ public class Frame_employeeApply extends javax.swing.JFrame {
         jScrollPane1.setViewportView(address);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(60, 270, 500, 100);
+        jScrollPane1.setBounds(40, 260, 520, 100);
 
-        phone.setBackground(new java.awt.Color(0, 204, 204));
+        phone.setBackground(new java.awt.Color(204, 255, 255));
         phone.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         phone.setForeground(new java.awt.Color(0, 0, 0));
         phone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -167,9 +157,9 @@ public class Frame_employeeApply extends javax.swing.JFrame {
             }
         });
         jPanel3.add(phone);
-        phone.setBounds(60, 190, 230, 50);
+        phone.setBounds(40, 190, 230, 50);
 
-        position.setBackground(new java.awt.Color(0, 204, 204));
+        position.setBackground(new java.awt.Color(204, 255, 255));
         position.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         position.setForeground(new java.awt.Color(0, 0, 0));
         position.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -185,7 +175,7 @@ public class Frame_employeeApply extends javax.swing.JFrame {
         jPanel3.add(position);
         position.setBounds(330, 110, 230, 50);
 
-        dept.setBackground(new java.awt.Color(0, 204, 204));
+        dept.setBackground(new java.awt.Color(204, 255, 255));
         dept.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         dept.setForeground(new java.awt.Color(0, 0, 0));
         dept.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -201,7 +191,7 @@ public class Frame_employeeApply extends javax.swing.JFrame {
         jPanel3.add(dept);
         dept.setBounds(330, 190, 230, 50);
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 204));
+        jButton2.setBackground(new java.awt.Color(204, 255, 255));
         jButton2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("REGISTER");
@@ -211,10 +201,23 @@ public class Frame_employeeApply extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton2);
-        jButton2.setBounds(180, 390, 230, 50);
+        jButton2.setBounds(40, 380, 230, 50);
+
+        jButton1.setBackground(new java.awt.Color(204, 255, 255));
+        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("RETURN");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1);
+        jButton1.setBounds(330, 380, 230, 50);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(90, 170, 600, 470);
+        jPanel3.setBounds(50, 100, 600, 480);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,7 +227,7 @@ public class Frame_employeeApply extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

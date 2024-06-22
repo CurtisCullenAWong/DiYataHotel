@@ -94,23 +94,24 @@ public class Frame_room extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 800));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Room List");
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 30, 580, 100);
+        jLabel1.setBounds(0, 0, 700, 100);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("RETURN");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -120,14 +121,14 @@ public class Frame_room extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(310, 660, 160, 70);
+        jButton1.setBounds(10, 530, 160, 60);
 
-        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
         jPanel3.setLayout(null);
 
         jScrollPane1.setRowHeaderView(null);
 
-        roomtbl.setBackground(new java.awt.Color(0, 204, 204));
+        roomtbl.setBackground(new java.awt.Color(255, 204, 204));
         roomtbl.setFont(new java.awt.Font("Imprint MT Shadow", 1, 18)); // NOI18N
         roomtbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,10 +157,13 @@ public class Frame_room extends javax.swing.JFrame {
         jScrollPane1.setViewportView(roomtbl);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 20, 560, 360);
+        jScrollPane1.setBounds(10, 10, 510, 370);
 
-        jButton3.setBackground(new java.awt.Color(153, 255, 255));
-        jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(10, 130, 530, 390);
+
+        jButton3.setBackground(new java.awt.Color(255, 204, 204));
+        jButton3.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Available");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -168,11 +172,11 @@ public class Frame_room extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton3);
-        jButton3.setBounds(350, 390, 200, 70);
+        jPanel1.add(jButton3);
+        jButton3.setBounds(550, 180, 140, 50);
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 255));
-        jButton2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Housekeeping");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -181,21 +185,18 @@ public class Frame_room extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2);
-        jButton2.setBounds(50, 390, 200, 70);
-
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(90, 170, 600, 470);
+        jPanel1.add(jButton2);
+        jButton2.setBounds(550, 250, 140, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

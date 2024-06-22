@@ -40,15 +40,17 @@ public class Dash_reception extends javax.swing.JFrame {
         room1 = new javax.swing.JButton();
         room = new javax.swing.JButton();
         loyalty = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Receptionist Dashboard");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(null);
 
-        jLabel2.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel2.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Receptionist Dashboard");
@@ -56,10 +58,10 @@ public class Dash_reception extends javax.swing.JFrame {
         jLabel2.setOpaque(true);
         jLabel2.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(100, 30, 600, 100);
+        jLabel2.setBounds(0, 0, 700, 100);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("LOGOUT");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -69,13 +71,13 @@ public class Dash_reception extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 660, 160, 70);
+        jButton1.setBounds(10, 540, 170, 50);
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         jPanel2.setLayout(null);
 
-        checkin.setBackground(new java.awt.Color(0, 204, 204));
-        checkin.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        checkin.setBackground(new java.awt.Color(255, 204, 204));
+        checkin.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         checkin.setForeground(new java.awt.Color(0, 0, 0));
         checkin.setText("Guest Check In");
         checkin.addActionListener(new java.awt.event.ActionListener() {
@@ -84,10 +86,10 @@ public class Dash_reception extends javax.swing.JFrame {
             }
         });
         jPanel2.add(checkin);
-        checkin.setBounds(60, 30, 230, 100);
+        checkin.setBounds(0, 0, 230, 100);
 
-        checkout.setBackground(new java.awt.Color(0, 204, 204));
-        checkout.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        checkout.setBackground(new java.awt.Color(255, 204, 204));
+        checkout.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         checkout.setForeground(new java.awt.Color(0, 0, 0));
         checkout.setText("Guest Check Out");
         checkout.addActionListener(new java.awt.event.ActionListener() {
@@ -96,10 +98,10 @@ public class Dash_reception extends javax.swing.JFrame {
             }
         });
         jPanel2.add(checkout);
-        checkout.setBounds(310, 30, 230, 100);
+        checkout.setBounds(230, 0, 230, 100);
 
-        room1.setBackground(new java.awt.Color(0, 204, 204));
-        room1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        room1.setBackground(new java.awt.Color(255, 204, 204));
+        room1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         room1.setForeground(new java.awt.Color(0, 0, 0));
         room1.setText("Reservation");
         room1.addActionListener(new java.awt.event.ActionListener() {
@@ -108,10 +110,10 @@ public class Dash_reception extends javax.swing.JFrame {
             }
         });
         jPanel2.add(room1);
-        room1.setBounds(60, 170, 230, 100);
+        room1.setBounds(0, 100, 230, 100);
 
-        room.setBackground(new java.awt.Color(0, 204, 204));
-        room.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        room.setBackground(new java.awt.Color(255, 204, 204));
+        room.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         room.setForeground(new java.awt.Color(0, 0, 0));
         room.setText("Housekeeping");
         room.addActionListener(new java.awt.event.ActionListener() {
@@ -120,10 +122,10 @@ public class Dash_reception extends javax.swing.JFrame {
             }
         });
         jPanel2.add(room);
-        room.setBounds(310, 170, 230, 100);
+        room.setBounds(230, 100, 230, 100);
 
-        loyalty.setBackground(new java.awt.Color(0, 204, 204));
-        loyalty.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        loyalty.setBackground(new java.awt.Color(255, 204, 204));
+        loyalty.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         loyalty.setForeground(new java.awt.Color(0, 0, 0));
         loyalty.setText("Guest Loyalty");
         loyalty.addActionListener(new java.awt.event.ActionListener() {
@@ -132,24 +134,25 @@ public class Dash_reception extends javax.swing.JFrame {
             }
         });
         jPanel2.add(loyalty);
-        loyalty.setBounds(60, 320, 480, 100);
+        loyalty.setBounds(0, 200, 460, 100);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(100, 160, 600, 470);
+        jPanel2.setBounds(120, 170, 460, 300);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dashboard.jpg"))); // NOI18N
+        jLabel3.setRequestFocusEnabled(false);
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 80, 700, 550);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -206,6 +209,7 @@ public class Dash_reception extends javax.swing.JFrame {
     private javax.swing.JButton checkout;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loyalty;

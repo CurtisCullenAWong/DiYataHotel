@@ -46,20 +46,22 @@ public class Frame_checkout extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        amount = new javax.swing.JComboBox<>();
         roomID = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         paymentMode = new javax.swing.JComboBox<>();
+        amount = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
         jPanel1.setLayout(null);
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 48)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Guest Checkout");
@@ -67,10 +69,10 @@ public class Frame_checkout extends javax.swing.JFrame {
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 30, 600, 100);
+        jLabel1.setBounds(0, 0, 700, 100);
 
-        jButton1.setBackground(new java.awt.Color(153, 255, 255));
-        jButton1.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("RETURN");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -80,37 +82,35 @@ public class Frame_checkout extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 660, 160, 70);
+        jButton1.setBounds(10, 530, 160, 60);
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setLayout(null);
 
-        amount.setBackground(new java.awt.Color(0, 204, 204));
-        amount.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
-        amount.setForeground(new java.awt.Color(0, 0, 0));
-        amount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1500", "2000", "2500", "3000", "4000", "4500", "5000" }));
-        jPanel2.add(amount);
-        amount.setBounds(60, 190, 260, 90);
-
-        roomID.setBackground(new java.awt.Color(0, 204, 204));
-        roomID.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
+        roomID.setBackground(new java.awt.Color(255, 204, 204));
+        roomID.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
         roomID.setForeground(new java.awt.Color(0, 0, 0));
         roomID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        roomID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roomIDActionPerformed(evt);
+            }
+        });
         jPanel2.add(roomID);
-        roomID.setBounds(240, 40, 310, 90);
+        roomID.setBounds(170, 10, 300, 50);
 
-        jLabel2.setBackground(new java.awt.Color(0, 204, 204));
-        jLabel2.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
+        jLabel2.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Room #");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(60, 40, 140, 90);
+        jLabel2.setBounds(10, 10, 140, 50);
 
-        jButton3.setBackground(new java.awt.Color(153, 255, 255));
-        jButton3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        jButton3.setBackground(new java.awt.Color(255, 204, 204));
+        jButton3.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Check Out");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -120,42 +120,56 @@ public class Frame_checkout extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(50, 340, 500, 90);
+        jButton3.setBounds(90, 190, 310, 50);
 
-        paymentMode.setBackground(new java.awt.Color(0, 204, 204));
-        paymentMode.setFont(new java.awt.Font("Imprint MT Shadow", 1, 36)); // NOI18N
+        paymentMode.setBackground(new java.awt.Color(255, 204, 204));
+        paymentMode.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
         paymentMode.setForeground(new java.awt.Color(0, 0, 0));
         paymentMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit", "Debit" }));
         jPanel2.add(paymentMode);
-        paymentMode.setBounds(330, 190, 220, 90);
+        paymentMode.setBounds(120, 130, 250, 50);
 
-        jLabel3.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Imprint MT Shadow", 1, 24)); // NOI18N
+        amount.setBackground(new java.awt.Color(255, 204, 204));
+        amount.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
+        amount.setForeground(new java.awt.Color(0, 0, 0));
+        amount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        amount.setText("Prices");
+        amount.setToolTipText("");
+        amount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        amount.setOpaque(true);
+        amount.setPreferredSize(new java.awt.Dimension(300, 300));
+        jPanel2.add(amount);
+        amount.setBounds(170, 70, 300, 50);
+
+        jLabel3.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel3.setFont(new java.awt.Font("Copperplate Gothic Light", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Room Rates:");
         jLabel3.setToolTipText("");
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel3.setOpaque(true);
         jLabel3.setPreferredSize(new java.awt.Dimension(300, 300));
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(60, 140, 160, 50);
+        jLabel3.setBounds(10, 70, 140, 50);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(100, 160, 600, 470);
+        jPanel2.setBounds(100, 210, 490, 250);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hotel Room Color Scheme Tips.jpg"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(0, 90, 700, 530);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -166,11 +180,12 @@ public class Frame_checkout extends javax.swing.JFrame {
         String formattedDate = currentDate.format(formatter);
         try {
             Connection connection = netvince.diyatahotel.connect.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_id` FROM `transaction overview table` WHERE `guest_id` = ? ORDER BY `guest_id` DESC LIMIT 1");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT `guest_id` FROM `transaction overview table` WHERE room_id = ? AND transactiontype = 'Checkin' ORDER BY transactionoverview_id DESC LIMIT 1");
             preparedStatement.setString(1,Integer.toString(room));
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM `transaction overview table`");
+                PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT `checkin_date` FROM `transaction overview table` WHERE room_id = ? AND transactiontype = 'Checkin' ORDER BY transactionoverview_id DESC LIMIT 1");
+                preparedStatement1.setString(1,Integer.toString(room));
                 ResultSet resultSet1 = preparedStatement1.executeQuery();
                 while(resultSet1.next()){
                     String id = resultSet.getString("guest_id");
@@ -217,8 +232,8 @@ public class Frame_checkout extends javax.swing.JFrame {
         // TODO add your handling code here:
         String mode = (String) paymentMode.getSelectedItem().toString();
         int room = Integer.parseInt((String)roomID.getSelectedItem().toString().substring(0,2).trim());
-        String amt = (String) amount.getSelectedItem().toString();
-        if(amt.equals("Amount")){
+        String amt = amount.getText();
+        if(amt.equals("Prices")){
             JOptionPane.showMessageDialog(null, "Please fill in all the fields","Invalid Input",DO_NOTHING_ON_CLOSE);
         }
         else{
@@ -228,6 +243,38 @@ public class Frame_checkout extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void roomIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomIDActionPerformed
+        // TODO add your handling code here:
+        String amt = (String) roomID.getSelectedItem().toString();
+        if(amt.contains("Single")){
+            amount.setText("1000");
+        }
+        else if(amt.contains("Double")){
+            amount.setText("2000");
+        }
+        else if(amt.contains("Twin")){
+            amount.setText("3000");
+        }
+        else if(amt.contains("Triple")){
+            amount.setText("4000");
+        }
+        else if(amt.contains("Suite")){
+            amount.setText("5000");
+        }
+        else if(amt.contains("Family")){
+            amount.setText("6000");
+        }
+        else if(amt.contains("Deluxe")){
+            amount.setText("7000");
+        }
+        else if(amt.contains("Superior")){
+            amount.setText("8000");
+        }
+        else if(amt.contains("Executive")){
+            amount.setText("9000");
+        }
+    }//GEN-LAST:event_roomIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,12 +439,13 @@ public class Frame_checkout extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> amount;
+    private javax.swing.JLabel amount;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> paymentMode;
